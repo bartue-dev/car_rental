@@ -1,8 +1,15 @@
+import Hero from "@/components/hero";
+import Vehicles from "@/components/vehicles";
 
 function Home() {
   return (
     <div>
-      <h1>HELLO HOME!</h1>
+      <div className="flex flex-col items-center justify-center mb-10">
+        <Hero />
+      </div>
+      <div>
+        <Vehicles />
+      </div>
     </div>
   )
 }
