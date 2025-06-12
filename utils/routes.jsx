@@ -9,6 +9,8 @@ import RequiredAuth from "../src/Pages/requiredAuth";
 import Admin from "../src/Pages/protectedRoute/admin/admin";
 import User from "../src/Pages/protectedRoute/user/user";
 import PersistLogin from "../src/Pages/persistLogin";
+import Vehicles from "@/components/vehicles";
+import VehicleDetails from "@/Pages/publicRoute/vehicleDetails";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,8 @@ const router = createBrowserRouter([
       // Public routes
       { index: true, element: <Home /> },
       { path: "home", element: <Home /> },
+      { path: "vehicles", element: <Vehicles />},
+      { path: "/vehicle-details/:vehicleId", element: <VehicleDetails />},
 
       // Private routes can be added here
       { element: <PersistLogin />,
@@ -29,7 +33,7 @@ const router = createBrowserRouter([
           ]},
         { element: <RequiredAuth allowedRole="USER"/>,
           children: [
-            { path: "/user", element: <User />}
+            { path: "/user", element: <User />},
           ]}
         ]},
     ]
