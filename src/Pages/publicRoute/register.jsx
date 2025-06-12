@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
+import { RegisterForm } from "@/components/register-form";
 
 function Register() {
   const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])[A-Za-z\d#?!@$%^&*-]{8,}$/
@@ -84,64 +85,14 @@ function Register() {
   }, [serverError])
   
   return (
-    <div>
-     
-      <form 
-        className="flex flex-col border border-gray-400 rounded-md m-auto mt-10 gap-4 w-fit px-10 py-5"
-        onSubmit={handleSubmit}
-      >
-        <h1 className="m-auto font-bold text-3xl">Register</h1>
-
-        <div className="w-60 ">
-          {/* if serverError is not empty 
-              validate again if serverError.errors(validationErr in the backend) exist 
-              if true display array of errors
-              if serverError.errors doesnt exist
-              validate again if serverError.message exist 
-              if true display serverError.message
-              if serverError.message doesnt exist 
-              validate again if serverError exist 
-              if true display serverError.serverError
-          */}
-          {Object.keys(serverError).length > 0 
-            && serverError?.serverError?.errors
-              ? serverError?.serverError?.errors.map((error, index) => {
-                return (
-                    <p key={index}>
-                      <span className="text-sm text-red-600">{error.msg}</span>
-                    </p>
-                )})
-              : serverError?.serverError?.message
-                ? <p className="text-sm text-red-600">{serverError.serverError.message}</p>
-                : serverError?.serverError && <p className="text-sm text-red-600">{serverError.serverError}</p> 
-          }
-        </div>
-
-        <div className="flex flex-col gap-2  w-60">
-          <label htmlFor="username">Username:</label>
-          <input id="username" name="username" type="text" placeholder="Username" className="input" />
-          {errorMsg.username && <p className="text-xs text-red-600">{errorMsg.username}</p>}
-        </div>
-
-        <div className="flex flex-col gap-2  w-60">
-          <label htmlFor="password">Password:</label>
-          <input id="password" name="password" type="password" placeholder="Password" className="input" />
-          {errorMsg.password && <p className="text-xs text-red-600">{errorMsg.password}</p>}
-        </div>
-
-        <button 
-          className="btn btn-primary"
-          type="submit"
-          >
-            Register
-        </button>
-
-        <p className="text-xs m-auto">
-          already have an account? 
-          <Link to="/login"><span className="underline text-blue-600 px-1"> login </span></Link> 
-           here
-        </p>
-      </form>
+    <div  className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        <RegisterForm 
+          onSubmit={handleSubmit}
+          serverError={serverError}
+          errorMsg={errorMsg}
+        />
+      </div>
     </div>
   )
 }
