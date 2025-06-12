@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { LoginForm } from "@/components/login-form";
 
 function Login() {
   const [serverErrMsg, setServerErrMsg] = useState({});
@@ -80,50 +81,13 @@ function Login() {
   }
 
   return (
-    <div>
-      <form 
-        className="flex flex-col border border-gray-400 rounded-md m-auto mt-10 gap-4 w-fit px-10 py-5"
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+      <LoginForm 
         onSubmit={handleSubmit}
-      >
-
-        <h1 className="m-auto font-bold text-3xl">Log in</h1>
-        
-        {/* display serverErrMsg if not empty  */}
-        {Object.keys(serverErrMsg).length > 0
-          && <p className="text-sm text-red-600">{serverErrMsg.failed}</p> 
-        }
-
-        <div className="flex flex-col gap-2  w-60">
-          <label htmlFor="username">Username:</label>
-          <input id="username" name="username" type="text" placeholder="Username" className="input" />
-        </div>
-
-        <div className="flex flex-col gap-2  w-60">
-          <label htmlFor="password">Password:</label>
-          <input id="password" name="password" type="password" placeholder="Password" className="input" />
-        </div>
-
-        <button 
-          className="btn btn-primary"
-          type="submit"
-          >
-            Log in
-        </button>
-
-        <p className="text-xs m-auto">
-          No account yet? 
-          <Link 
-            to="/register"
-          > 
-            <span 
-              className="underline text-blue-600 px-1"
-            >
-              register 
-            </span>
-          </Link>
-              here
-        </p>
-      </form>
+        serverErrMsg={serverErrMsg}
+      />
+      </div>
     </div>
   ) 
 }
