@@ -1,10 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
-import ProfileStatus from "./profileStatus";
+import ProfileStatus from "./subComponents/profileStatus";
+import { Car } from "lucide-react";
 
 function Navbar() {
 
   return (
-    <div className="navbar bg-base-10 shadow-2xs px-10 font-poppins">
+    <div className="navbar bg-base-10 border-b-1 border-gray-300 px-10 font-poppins">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -24,10 +25,10 @@ function Navbar() {
           </li>
           <li>
             <Link
-             to="/vehicle"
+             to="/vehicles"
              className="px-4 hover:bg-primary hover:text-white text-base"
              >
-              Vehicle
+              Vehicles
             </Link>
           </li>
           <li>
@@ -40,7 +41,7 @@ function Navbar() {
           </li>
           </ul>
         </div>
-        <Link to="/home" className="text-2xl btn btn-ghost font-bold hover:bg-transparent outline-0 border-0 shadow-none">Rent-a-Car</Link>
+        <Link to="/home" className="text-2xl btn btn-ghost font-bold hover:bg-transparent outline-0 border-0 shadow-none italic flex justify-center items-center gap-2"><Car size={40}/> EzRent</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-base  gap-4">
@@ -51,10 +52,10 @@ function Navbar() {
           </li>
           <li>
             <Link
-             to="/vehicle"
+             to="/vehicles"
              className="px-4 hover:bg-primary hover:text-white"
              >
-              Vehicle
+              Vehicles
             </Link>
           </li>
           <li>
