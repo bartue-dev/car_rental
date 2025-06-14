@@ -1,8 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ProfileStatus from "./subComponents/profileStatus";
-import { Car } from "lucide-react";
+
 
 function Navbar() {
+  const location = useLocation();
+  const path = location?.pathname.split("/")[1];
 
   return (
     <div className="navbar bg-base-10 border-b-1 border-gray-300 px-10 font-poppins">
@@ -17,7 +19,7 @@ function Navbar() {
           >
             <li>
             <Link
-              className="px-4 hover:bg-primary hover:text-white text-base"
+              className="px-4 hover:bg-primary hover:text-white text-sm"
               to="/home"
             >
               Home
@@ -26,7 +28,7 @@ function Navbar() {
           <li>
             <Link
              to="/vehicles"
-             className="px-4 hover:bg-primary hover:text-white text-base"
+             className="px-4 hover:bg-primary hover:text-white text-sm"
              >
               Vehicles
             </Link>
@@ -34,34 +36,42 @@ function Navbar() {
           <li>
             <Link 
             to="/about"
-            className="px-4 hover:bg-primary hover:text-white text-base"
+            className="px-4 hover:bg-primary hover:text-white text-sm"
             >
               About
             </Link>
           </li>
           </ul>
         </div>
-        <Link to="/home" className="text-2xl btn btn-ghost font-bold hover:bg-transparent outline-0 border-0 shadow-none italic flex justify-center items-center gap-2"><Car size={40}/> EzRent</Link>
+        <Link 
+          to="/"
+          className="text-2xl btn btn-ghost font-bold hover:bg-transparent outline-0 border-0 shadow-none italic flex justify-center items-center gap-2"
+        >
+          EzRent
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-base  gap-4">
           <li>
             <Link
-            className="px-4 hover:bg-primary hover:text-white"
-             to="/home">Home</Link>
+              className={`px-4 hover:bg-primary hover:text-white ${path === "home" && "font-semibold"}`}
+              to="/home"
+              >
+                Home
+            </Link>
           </li>
           <li>
             <Link
-             to="/vehicles"
-             className="px-4 hover:bg-primary hover:text-white"
+              to="/vehicles"
+              className={`px-4 hover:bg-primary hover:text-white ${path === "vehicles" && "font-semibold"}`}
              >
               Vehicles
             </Link>
           </li>
           <li>
             <Link 
-            to="/about"
-            className="px-4 hover:bg-primary hover:text-white"
+              to="/about"
+              className={`px-4 hover:bg-primary hover:text-white ${path === "about" && "font-semibold"}`}
             >
               About
             </Link>
