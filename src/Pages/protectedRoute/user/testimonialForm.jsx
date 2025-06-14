@@ -26,7 +26,7 @@ function TestimonialForm() {
 
 
   return (
-    <div className="font-poppins w-1/2 flex flex-col gap-5">
+    <div className="font-poppins w-1/2 flex flex-col gap-5 place-self-center">
       <h1 className="text-3xl font-bold">Share your feedback</h1>
       <p className="text-base">Thanks for using our service! We'd love to hear your thoughts—just a quick message to let us know how we can improve and do better next time.</p>
 
@@ -35,7 +35,7 @@ function TestimonialForm() {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="content"></label>
-          <textarea className="textarea resize-none w-full" placeholder="Your message" id="content" name="content" rows={8}></textarea>
+          <textarea className="textarea resize-none w-full border" placeholder="Your message" id="content" name="content" rows={8}></textarea>
         </div>
         <button className="btn btn-primary mt-5" type="submit">Submit</button>
       </form>
