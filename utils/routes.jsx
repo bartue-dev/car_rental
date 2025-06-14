@@ -7,10 +7,10 @@ import Register from "../src/Pages/publicRoute/register";
 import Unauthorized from "../src/Pages/unauthorized";
 import RequiredAuth from "../src/Pages/requiredAuth";
 import Admin from "../src/Pages/protectedRoute/admin/admin";
-import User from "../src/Pages/protectedRoute/user/user";
 import PersistLogin from "../src/Pages/persistLogin";
 import Vehicles from "@/components/vehicles";
 import VehicleDetails from "@/Pages/publicRoute/vehicleDetails";
+import TestimonialForm from "@/Pages/protectedRoute/user/testimonialForm";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
           ]},
         { element: <RequiredAuth allowedRole="USER"/>,
           children: [
-            { path: "/user", element: <User />},
+            { path: "/testimonials", element: <TestimonialForm />},
           ]}
         ]},
     ]
