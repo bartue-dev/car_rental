@@ -6,11 +6,15 @@ import Login from "../src/Pages/publicRoute/login";
 import Register from "../src/Pages/publicRoute/register";
 import Unauthorized from "../src/Pages/unauthorized";
 import RequiredAuth from "../src/Pages/requiredAuth";
-import Admin from "../src/Pages/protectedRoute/admin/admin";
 import PersistLogin from "../src/Pages/persistLogin";
 import Vehicles from "@/components/vehicles";
 import VehicleDetails from "@/Pages/publicRoute/vehicleDetails";
 import TestimonialForm from "@/Pages/protectedRoute/user/testimonialForm";
+import Dashboard from "@/Pages/protectedRoute/admin/dashboard";
+import Main from "@/Pages/protectedRoute/admin/main";
+import Bookings from "@/Pages/protectedRoute/admin/bookings";
+import AdminVehicles from "@/Pages/protectedRoute/admin/admin-vehicles";
+import AdminTestimonials from "@/Pages/protectedRoute/admin/admin-testimonials";
 
 const router = createBrowserRouter([
   {
@@ -22,18 +26,27 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "home", element: <Home /> },
       { path: "vehicles", element: <Vehicles />},
-      { path: "/vehicle-details/:vehicleId", element: <VehicleDetails />},
+      { path: "vehicle-details/:vehicleId", element: <VehicleDetails />},
 
       // Private routes can be added here
       { element: <PersistLogin />,
         children: [
         { element: <RequiredAuth allowedRole="ADMIN"/>,
           children: [
-            { path: "/admin", element: <Admin />}
+            { path: "/dashboard", element: <Dashboard />,
+              children: [
+                { index: true, element: <Main />},
+                { path: "main", element: <Main />},
+                { path: "bookings", element: <Bookings />},
+                { path: "admin-vehicles", element: <AdminVehicles />},
+                { path: "admin-testimonials", element: <AdminTestimonials />},
+              ]
+            },
+            
           ]},
         { element: <RequiredAuth allowedRole="USER"/>,
           children: [
-            { path: "/testimonials", element: <TestimonialForm />},
+            { path: "testimonials", element: <TestimonialForm />},
           ]}
         ]},
     ]
