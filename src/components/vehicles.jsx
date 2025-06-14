@@ -82,9 +82,13 @@ function Vehicles() {
                   </div>
                   {/* link to vehicleDetails */}
                   <div className="-row-span-2 flex flex-wrap items-center gap-2 md:flex-row">
-                    <Link to={`/vehicle-details/${vehicle.vehicleId}`}>
-                      <Button className="px-10 cursor-pointer">Book</Button>
-                    </Link>
+                    {vehicle.status.toLowerCase() === "available"
+                      ? <Link to={`/vehicle-details/${vehicle.vehicleId}`}>
+                          <Button className="px-10 cursor-pointer">Book</Button>
+                        </Link>
+                      : <Button className="px-10" disabled>Book</Button>
+                    }
+                    
                   </div>
                 </div>
               </div>
