@@ -40,7 +40,7 @@ function ProfileStatus() {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
-                <li><a className="text-base hover:bg-primary hover:text-white">Book now</a></li>
+                <li><Link to="/testimonials" className="text-base hover:bg-primary hover:text-white">Create testimonials</Link></li>
                 <li><a onClick={handleLogout} className="text-base hover:bg-primary hover:text-white">Logout</a></li>
               </ul>
             </div>
