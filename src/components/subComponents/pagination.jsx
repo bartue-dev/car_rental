@@ -47,6 +47,7 @@ export function VehiclePagination({currentPage, totalPage, itemsRender}) {
                 <PaginationLink 
                   onClick={() => handlePageClick(page)}
                   isActive={currentPage === page}
+                  className="cursor-pointer"
                 >
                   {page}
 
