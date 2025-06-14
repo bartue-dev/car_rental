@@ -56,7 +56,7 @@ function Login() {
       setUser(userObject)
       
       if (role === "ADMIN") {
-        navigate("/admin")
+        navigate("/dashboard")
       } else {
         //navigate to the previous page if it is redirected to the log in
         navigate(from, {replace: true})
