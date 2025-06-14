@@ -43,8 +43,10 @@ function BookingForm() {
         validationMsg.phoneNumber = "Invalid Phone number";
       }
 
-      const pickupDateTime = `${format(new Date(pickupDate), "MM/dd/yyyy")}, ${formData.get("pickupTime")}`
-      if (pickupDate <= new Date()) {
+      if (!pickupDate) {
+        console.log("TURUE")
+        validationMsg.pickupDate = "Please Select Pickup Date"
+      } else if (pickupDate <= new Date()) {
         validationMsg.pickupDate = "Date must be today or later"
       }
 
@@ -55,6 +57,8 @@ function BookingForm() {
 
       setErrMsg({});
       setPickupDate(undefined);
+
+       const pickupDateTime = `${format(new Date(pickupDate), "MM/dd/yyyy")}, ${formData.get("pickupTime")}`
 
       //backend
       const response = await axiosPrivate.post("/v1/booking",
@@ -68,13 +72,12 @@ function BookingForm() {
       e.target.reset();
     } catch (error) {
       console.error(error)
+      if (error?.status === 403) {
+        navigate("/login", { state: { from: location }, replace:true })
+      }
 
       if (error?.name === "RangeError") {
         setErrMsg(prev => ({...prev, pickupDate: "Invalid Date"}))
-      }
-
-      if (error?.status === 403) {
-        navigate("/login", { state: { from: location }, replace:true })
       }
     }
   }
