@@ -58,40 +58,7 @@ function ProfileStatus() {
               </ul>
             </div>
           </div>
-          : user?.role === "ADMIN"
-            ?
-            /* admin profile status container */
-            <div className="flex justify-center items-center gap-3">
-              <div className="tooltip tooltip-left tooltip-primary" data-tip={`Hi, ${user?.username}`}>
-                <div className="avatar">
-                  <UserRound 
-                    size={25}
-                  />
-                </div>
-              </div>
-              <div className="dropdown dropdown-end">
-                <div 
-                  tabIndex={0} 
-                  className="flex justify-center items-center gap-2 w-22 h-10 rounded-md cursor-pointer hover:border-2"
-                >
-                  {user?.username.charAt(0).toUpperCase() + user?.username.slice(1)}
-                  <ChevronDown size={14}/>
-                </div>
-                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                  <li>
-                    <Link to="/admin" className="text-sm hover:bg-primary hover:text-white">
-                      Dashboard
-                    </Link>
-                  </li>
-                  <li>
-                    <a onClick={handleLogout} className="text-sm hover:bg-primary hover:text-white">
-                      Logout
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            : <Link to="/login" className="bg-base-100 text-base hover:font-semibold">Log in</Link>
+          : <Link to="/login" className="bg-base-100 text-base hover:font-semibold">Log in</Link>
         }
     </>
   )
