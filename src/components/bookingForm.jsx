@@ -15,6 +15,7 @@ function BookingForm() {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,22 +44,28 @@ function BookingForm() {
         validationMsg.phoneNumber = "Invalid Phone number";
       }
 
+      const now = format(new Date(), "MM/dd/yyyy");
+      
       if (!pickupDate) {
         console.log("TURUE")
-        validationMsg.pickupDate = "Please Select Pickup Date"
-      } else if (pickupDate <= new Date()) {
+        validationMsg.pickupDate = "Select Pickup Date"
+      } else if (format(new Date(pickupDate), "MM/dd/yyyy") < now) {
         validationMsg.pickupDate = "Date must be today or later"
       }
-
+      
       if (Object.keys(validationMsg).length > 0) {
         setErrMsg(validationMsg);
         return;
       }
-
+      
+      //set the state to default value
       setErrMsg({});
       setPickupDate(undefined);
-
-       const pickupDateTime = `${format(new Date(pickupDate), "MM/dd/yyyy")}, ${formData.get("pickupTime")}`
+      
+      //pickupDateTime for backend query
+      const formatedDate = format(new Date(pickupDate), "MM/dd/yyyy")
+      const pickupDateTime = `${formatedDate}, ${formData.get("pickupTime")}`
+      console.log(pickupDateTime)
 
       //backend
       const response = await axiosPrivate.post("/v1/booking",
@@ -118,7 +125,7 @@ function BookingForm() {
           </fieldset>
         </div>
         <div className="flex flex-wrap items-center gap-2 md:flex-row">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="cursor-pointer">Submit</Button>
         </div>
       </form>
     </div>
