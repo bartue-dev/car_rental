@@ -1,4 +1,4 @@
-import { createContext,  useState } from "react"
+import { createContext,  useState, useEffect } from "react"
 
 const AuthContext = createContext({})
 
@@ -7,21 +7,10 @@ export function AuthProvider({children}) {
   const [auth, setAuth] = useState({})
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
 
-  //retrieve localstorage user if username state is still null and save it to username state
-  //just a helper if ever the user state doesnt get the localStorage user
-  // useEffect(() => {
-  //   try {
-  //     if (user === null || user === undefined) {
-  //       const item = localStorage.getItem("user")
-  //       if (item) {
-  //         setUser(JSON.parse(item))
-  //       } 
-  //     }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }, [user])
-
+  useEffect(() => {
+    console.log("USER", user)
+  }, [user])
+  
   return (
     <AuthContext.Provider value={{auth, setAuth, user, setUser}}>
       {children}
