@@ -37,20 +37,30 @@ function Login() {
         }
       )
 
-      //set the username to the localstorage
-      //use for persistent profile status 
-      localStorage.setItem("user", JSON.stringify(username));
-      setUser(username)
-
       const accessToken = response.data.accessToken;
       const role = response.data.account.role;
       const accountId = response.data.account.accountId;
 
       //save the username, accessToken, role and accountId to the global state
       setAuth({username, accessToken, role, accountId});
+
+      //set the username and role in a object to the localstorage
+      //use for persistent profile status 
+      //if the page refresh the user state will get the object data from the localstorage
+      const userObject = {
+        username: username,
+        role: role
+      }
+      localStorage.setItem("user", JSON.stringify(userObject));
+      //initial set the object to user state
+      setUser(userObject)
       
-      //navigate to the previous page if it is redirected to the log in
-      navigate(from, {replace: true})
+      if (role === "ADMIN") {
+        navigate("/admin")
+      } else {
+        //navigate to the previous page if it is redirected to the log in
+        navigate(from, {replace: true})
+      }
 
       //reset the form after successfull log in
       e.target.reset();
