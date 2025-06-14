@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom";
 
 function Hero() {
 
@@ -12,7 +13,9 @@ function Hero() {
             <p className="mt-2 text-base tracking-wide">Get a car wherever and whenever you need it</p>
           </div>
           <div className="flex flex-wrap items-center gap-2 md:flex-row">
-            <Button className="px-10 cursor-pointer">Book now</Button>
+            <Link to="/vehicles">
+              <Button className="px-10 cursor-pointer">Book now</Button>
+            </Link>
           </div>
         </div>
 
