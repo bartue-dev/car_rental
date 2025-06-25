@@ -28,7 +28,6 @@ function useAxiosPrivate() {
         const prevRequest = error?.config;
 
         if (error?.response?.status === 403 && !prevRequest.sent) {
-          console.log("INTERCEPTER RESPONSE")
           prevRequest.sent = true;
           const newAccessToken = await refresh();
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
