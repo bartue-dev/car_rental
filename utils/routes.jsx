@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         children: [
         { element: <RequiredAuth allowedRole="ADMIN"/>,
           children: [
-            { path: "/dashboard", element: <Dashboard />,
+            { path: "/dashboard", element: <Dashboard/>,
               children: [
                 { index: true, element: <Main />},
                 { path: "main", element: <Main />},
