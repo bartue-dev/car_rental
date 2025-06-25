@@ -5,7 +5,7 @@ import { VehiclePagination } from "./subComponents/pagination";
 import { Link } from "react-router-dom";
 
 function Vehicles() {
-  const [vehicles, setVehicles] = useState();
+  const [vehicles, setVehicles] = useState([]);
   const [pagination, setPagination] = useState({
     totalPage: 0,
     currentPage: 1
@@ -14,7 +14,6 @@ function Vehicles() {
   //function to fetch the data from backend
   //pass as props for pagination component
   const getAllVehicle = async (page) => {
-    const controller = new AbortController();
     const ITEMS_PER_PAGE = 6
     
     try {
@@ -22,7 +21,6 @@ function Vehicles() {
 
       const response = await axios.get(`/v1/vehicle-public?skip=${skip}&take=${ITEMS_PER_PAGE}`,{
         withCredentials: true,
-        signal: controller.signal
       });
 
       //vehicle data
@@ -35,23 +33,10 @@ function Vehicles() {
     } catch (error) {
       console.log(error)
     }
-
-    return controller
   }
 
   useEffect(() => {
-
-    let controller;
-    const fetchData = async () => {
-      controller = await getAllVehicle(1);
-    } 
-
-    fetchData()
-
-    return () => {
-       controller?.abort();
-    }
-
+    getAllVehicle(1);
   },[])
 
 
