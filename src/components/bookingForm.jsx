@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Toaster, toast } from 'sonner'
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+import useLogout from "@/hooks/useLogout";
 
 function BookingForm() {
   const [errMsg, setErrMsg] = useState({});
@@ -14,6 +15,7 @@ function BookingForm() {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+  const logout = useLogout();
 
 
   const handleSubmit = async (e) => {
@@ -80,7 +82,8 @@ function BookingForm() {
     } catch (error) {
       console.error(error)
       if (error?.status === 403) {
-        navigate("/login", { state: { from: location }, replace:true })
+        navigate("/login", { state: { from: location }, replace:true });
+        await logout();
       }
 
       if (error?.name === "RangeError") {
