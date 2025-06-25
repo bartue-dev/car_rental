@@ -46,8 +46,6 @@ export function AppSidebar() {
 
   const path = location?.pathname
 
-  console.log("PATH ADMIN:", path)
-
   const handleLogout = async () => {
     await logout();
     navigate("/login")
@@ -74,7 +72,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-          <SidebarFooter>
+          <SidebarFooter className="px-4">
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton 
