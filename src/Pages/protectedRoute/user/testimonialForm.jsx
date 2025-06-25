@@ -2,12 +2,15 @@ import { useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Toaster, toast } from 'sonner'
+import useLogout from "@/hooks/useLogout";
 
 function TestimonialForm() {
   const [errMsg, setErrMsg] = useState()
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+  const logout = useLogout();
+
 
 
   const handleSubmit = async (e) => {
@@ -34,8 +37,9 @@ function TestimonialForm() {
 
     } catch (error) {
       console.error(error)
-      // if refresh token expires in cookie navigate to log in
+      // if refresh token expires in cookie logout and navigate to log in
       if (error?.status === 403) {
+        await logout();
         navigate("/login", { state: { from: location }, replace:true })
       }
     }
