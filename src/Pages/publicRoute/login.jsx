@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, } from "react-router-dom";
 import { LoginForm } from "@/components/login-form";
 
 function Login() {
@@ -9,9 +9,9 @@ function Login() {
   const { setAuth, setUser } = useAuth();
 
   const navigate = useNavigate();
-  const location = useLocation();
-  //get the history page and save it to the from variable or just save "/" path
-  const from = location.state?.from?.pathname || "/"; 
+ /*  const location = useLocation();
+  get the history page and save it to the from variable or just save "/" path
+  const from = location.state?.from?.pathname || "/"; */ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,10 +57,12 @@ function Login() {
       
       if (role === "ADMIN") {
         navigate("/dashboard")
-      } else {
-        //navigate to the previous page if it is redirected to the log in
-        navigate(from, {replace: true})
+      } else if (role === "USER") {
+        navigate("/home")
       }
+
+      /* navigate to the previous page if it is redirected to the log in
+      navigate(from, {replace: true}) */
 
       //reset the form after successfull log in
       e.target.reset();
