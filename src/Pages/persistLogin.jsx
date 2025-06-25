@@ -36,7 +36,7 @@ function PersistLogin() {
   return (
       <div>
         {isLoading 
-          ? <p>Loading...</p>
+          ? <p className="text-center">Loading...</p>
           : <Outlet/>}
       </div>
   )
