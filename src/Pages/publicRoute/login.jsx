@@ -2,7 +2,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import { useNavigate, } from "react-router-dom";
-import { LoginForm } from "@/components/login-form";
+import { LoginForm } from "@/components/auth/login-form";
 
 function Login() {
   const [serverErrMsg, setServerErrMsg] = useState({});
@@ -30,7 +30,7 @@ function Login() {
       //post credentials to log in endpoint
       const response = await axios.post(
         "/v1/login",
-        JSON.stringify({username, password}),
+        {username, password},
         {
           headers : {"Content-Type" : "application/json"},
           withCredentials: true //set to true as it is set to the backend
