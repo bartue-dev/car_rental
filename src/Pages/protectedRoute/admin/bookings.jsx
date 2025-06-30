@@ -1,9 +1,10 @@
+import { BookingTable } from "@/components/dashboard/bookingTable";
 
 function Bookings() {
 
   return (
     <div>
-      HELLO BOOKINGS
+      <BookingTable/>
     </div>
   )
 }
