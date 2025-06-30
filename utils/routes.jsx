@@ -7,7 +7,7 @@ import Register from "../src/Pages/publicRoute/register";
 import Unauthorized from "../src/Pages/unauthorized";
 import RequiredAuth from "../src/Pages/requiredAuth";
 import PersistLogin from "../src/Pages/persistLogin";
-import Vehicles from "@/components/vehicles";
+import Vehicles from "@/components/home/vehicles";
 import VehicleDetails from "@/Pages/publicRoute/vehicleDetails";
 import TestimonialForm from "@/Pages/protectedRoute/user/testimonialForm";
 import Dashboard from "@/Pages/protectedRoute/admin/dashboard";
