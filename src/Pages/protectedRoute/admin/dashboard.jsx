@@ -1,4 +1,4 @@
-import SidebarLayout from "@/components/sidebarLayout";
+import SidebarLayout from "@/components/dashboard/sidebarLayout";
 import { Outlet } from "react-router-dom";
 
 function Dashboard() {
