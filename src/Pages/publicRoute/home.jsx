@@ -1,5 +1,5 @@
-import Hero from "@/components/hero";
-import Vehicles from "@/components/vehicles";
+import Hero from "@/components/home/hero";
+import Vehicles from "@/components/home/vehicles";
 import useAuth from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
