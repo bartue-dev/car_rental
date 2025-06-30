@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "@/api/axios";
-import BookingForm from "@/components/bookingForm";
+import BookingForm from "@/components/booking/bookingForm";
 
 
 function VehicleDetails() {
