@@ -27,8 +27,6 @@ export function BookingTable() {
       try {
         const response = await axiosPrivate("/v1/booking-admin", {signal: controller.signal});
 
-        console.log(response)
-
         setBookings(response?.data?.data?.bookingsDetails);
 
       } catch (error) {
