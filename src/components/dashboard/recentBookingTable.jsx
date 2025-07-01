@@ -12,6 +12,7 @@ import {
 import { useEffect, useState  } from "react"
 import { useNavigate } from "react-router-dom";
 import useLogout from "@/hooks/useLogout";
+import { subDays, format } from "date-fns";
 
 function RecentBookings() {
   const [bookings, setBookings] = useState([]);
@@ -28,12 +29,18 @@ function RecentBookings() {
       try {
         const response = await axiosPrivate.get("/v1/booking-admin", {signal: controller.signal})
 
-      
-        // console.log("Bookings response: ", response)
-        setBookings(response?.data?.data.bookingsDetails)
+        const weekAgo = format(subDays(new Date(), 7), "yyyy-MM-dd");
+
+        /* save only the data that is created or updated a week ago */
+        for (const data of response.data.data.bookingsDetails) {
+          const date = data.updatedAt.split("T")[0];
+
+          if (date > weekAgo) {
+            setBookings(prev => [...prev, data])
+          }
+        }
 
       } catch (error) {
-        console.error(error)
 
         if (error?.code === "ERR_NETWORK") {
           setError(error?.message)
