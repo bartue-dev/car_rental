@@ -1,9 +1,10 @@
+import TestimonialsData from "@/components/dashboard/testimonialsData"
 
 function AdminTestimonials() {
 
   return (
     <div>
-      HELLO ADMIN TESTIMONIALS
+      <TestimonialsData/>
     </div>
   )
 }
