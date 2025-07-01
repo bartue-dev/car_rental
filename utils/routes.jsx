@@ -37,9 +37,9 @@ const router = createBrowserRouter([
               children: [
                 { index: true, element: <Main />},
                 { path: "main", element: <Main />},
-                { path: "bookings", element: <Bookings />},
-                { path: "admin-vehicles", element: <AdminVehicles />},
-                { path: "admin-testimonials", element: <AdminTestimonials />},
+                { path: "admin/bookings", element: <Bookings />},
+                { path: "admin/vehicles", element: <AdminVehicles />},
+                { path: "admin/testimonials", element: <AdminTestimonials />},
               ]
             },
             
