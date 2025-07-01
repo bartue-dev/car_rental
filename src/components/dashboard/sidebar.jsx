@@ -24,17 +24,17 @@ const items = [
   },
   {
     title: "Bookings",
-    url: "/dashboard/bookings",
+    url: "/dashboard/admin/bookings",
     icon: Inbox,
   },
   {
     title: "Vehicles",
-    url: "/dashboard/admin-vehicles",
+    url: "/dashboard/admin/vehicles",
     icon: Calendar,
   },
   {
     title: "Testimonials",
-    url: "/dashboard/admin-testimonials",
+    url: "/dashboard/admin/testimonials",
     icon: MessageCircle
   }
 ]
