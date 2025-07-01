@@ -1,11 +1,16 @@
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { useEffect, useState } from "react";
 import { CircleX, SquareMousePointer } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
+import useLogout from "@/hooks/useLogout";
 
 function TestimonialsData() {
   const [testimonials, setTestimonials] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState();
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate()
+  const logout = useLogout();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -16,7 +21,15 @@ function TestimonialsData() {
 
         setTestimonials(response?.data?.data?.allTestimonials)
       } catch (error) {
-        console.error(error)
+
+        if (error?.code === "ERR_NETWORK") {
+          setError(error?.message)
+        } else if (error?.response?.status === 400) {
+          setError(error?.response?.data?.message)
+        } else if (error?.response?.status === 403) {
+          await logout();
+          navigate("/login")
+        }
       } finally {
         setIsLoading(false)
       }
@@ -41,7 +54,9 @@ function TestimonialsData() {
         </div>
       </div>
       {isLoading
-        ? <p>Retrieving testimonials data. Please wait!</p>
+        ? <p className="text-center italic">Retrieving testimonials data. Please wait!</p>
+        : error 
+        ? <p className="text-center italic">Sorry unable to retrieve testimonials data</p>
         : <div className="grid grid-cols-2 gap-3">
             {testimonials?.map((testimonial) => (
               <div 
