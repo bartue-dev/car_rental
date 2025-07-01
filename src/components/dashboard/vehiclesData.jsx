@@ -1,11 +1,16 @@
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { useEffect, useState } from "react";
 import { ClipboardPlus } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
+import useLogout from "@/hooks/useLogout";
 
 function VehiclesData() {
   const [vehicles, setVehicles] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState();
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const logout = useLogout();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -14,12 +19,18 @@ function VehiclesData() {
       try {
         const response = await axiosPrivate.get("/v1/vehicle-admin", {signal: controller.signal});
 
-        console.log("ADMIN VEHICLES: ", response)
-
         setVehicles(response?.data?.data?.vehicleDetails);
 
       } catch (error) {
-        console.error(error)
+
+        if (error?.code === "ERR_NETWORK") {
+          setError(error?.message)
+        } else if (error?.response?.status === 400) {
+          setError(error?.response?.data?.message)
+        } else if (error?.response?.status === 403) {
+          await logout();
+          navigate("/login")
+        }
       } finally {
         setIsLoading(false)
       }
@@ -46,6 +57,8 @@ function VehiclesData() {
 
       {isLoading
         ? <p className="italic text-center">Retrieving vehicles data. Please wait!</p>
+        : error
+        ? <p className="italic text-center">Sorry unable to retrieve vehicles data.</p>
         : <div className="grid grid-cols-2 gap-4">
             {vehicles?.map((vehicle) => (
               <div key={vehicle.vehicleId} className="flex items-center">
