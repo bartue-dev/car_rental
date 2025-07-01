@@ -1,10 +1,11 @@
+import VehiclesData from "@/components/dashboard/vehiclesData";
 
 
 function AdminVehicles() {
 
   return(
     <div>
-      HELLO ADMIN VEHICLES 
+      <VehiclesData/>
     </div>
   )
 }
