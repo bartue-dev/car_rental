@@ -11,8 +11,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-export function PickupDateTime({pickupDate, setPickupDate}) {
+import { useEffect } from "react"
+
+export function PickupDateTime({pickupDate, pickupTime , setPickupDate}) {
   const [open, setOpen] = React.useState(false)
+
+   useEffect(() => {
+      console.log("pickupDate", typeof pickupDate === "object")
+    },[pickupDate])
 
   return (
     <div className="flex gap-4">
@@ -27,7 +33,7 @@ export function PickupDateTime({pickupDate, setPickupDate}) {
               id="date"
               className="w-32 justify-between font-normal"
             >
-              {pickupDate ? pickupDate.toLocaleDateString() : "Select date"}
+              {typeof pickupDate === "object" ? pickupDate.toLocaleDateString() : typeof pickupDate === "string" ? pickupDate : "Select date"}
               <ChevronDownIcon />
             </Button>
           </PopoverTrigger>
@@ -52,7 +58,7 @@ export function PickupDateTime({pickupDate, setPickupDate}) {
           type="time"
           id="time"
           step="1"
-          defaultValue="10:30:00"
+          defaultValue={pickupTime || "12:00:00"}
           name="pickupTime"
           className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
         />
