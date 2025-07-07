@@ -9,7 +9,7 @@ import { Toaster, toast } from 'sonner'
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import useLogout from "@/hooks/useLogout";
 
-function BookingForm() {
+function BookingForm({vehicleId}) {
   const [errMsg, setErrMsg] = useState({});
   const [pickupDate, setPickupDate] = useState(undefined);
   const axiosPrivate = useAxiosPrivate();
@@ -71,7 +71,7 @@ function BookingForm() {
 
       //backend
       const response = await axiosPrivate.post("/v1/booking",
-        {firstName, lastName, address, phoneNumber, pickupDateTime}
+        {firstName, lastName, address, phoneNumber, pickupDateTime, vehicleId}
       );
 
       console.log("BOOKING RESPONSE:", response)
