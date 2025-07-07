@@ -9,6 +9,10 @@ function VehicleDetails() {
   const [vehicleDetails, setVehicleDetails] = useState();
 
   useEffect(() => {
+    console.log("VEHICLE DETAILS: ", vehicleDetails)
+  }, [vehicleDetails])
+
+  useEffect(() => {
     const controller = new AbortController();
 
     const getVehicle = async () => {
@@ -86,7 +90,7 @@ function VehicleDetails() {
           )
         }
         <div className="w-1/2 h-full">
-          <BookingForm />
+          <BookingForm {...vehicleDetails}/>
         </div>
     </div>
   )
