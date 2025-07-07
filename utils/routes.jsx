@@ -15,6 +15,7 @@ import Main from "@/Pages/protectedRoute/admin/main";
 import Bookings from "@/Pages/protectedRoute/admin/bookings";
 import AdminVehicles from "@/Pages/protectedRoute/admin/admin-vehicles";
 import AdminTestimonials from "@/Pages/protectedRoute/admin/admin-testimonials";
+import AddBooking from "@/components/dashboard/addBooking";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
               children: [
                 { index: true, element: <Main />},
                 { path: "main", element: <Main />},
-                { path: "admin/bookings", element: <Bookings />},
+                { path: "admin/bookings", element: <Bookings />,
+                  children: [
+                    { path: "add-booking", element: <AddBooking/>}
+                  ]
+                },
                 { path: "admin/vehicles", element: <AdminVehicles />},
                 { path: "admin/testimonials", element: <AdminTestimonials />},
               ]
