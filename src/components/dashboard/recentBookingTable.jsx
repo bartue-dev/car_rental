@@ -90,8 +90,9 @@ function RecentBookings() {
                 <TableCell >
                     <span 
                       className={booking.status === "PENDING" ? "text-yellow-700 bg-amber-200 px-2 py-0.5 rounded-md" 
-                        : booking.status === "CONFIRM" ? "text-green-700 bg-green-200 px-2 py-0.5 rounded-md" 
-                        : booking.status === "COMPLETED" && "text-blue-700 bg-blue-200 px-2 py-0.5 rounded-md"}
+                          : booking.status === "CONFIRM" ? "text-green-700 bg-green-200 px-2 py-0.5 rounded-md" 
+                          : booking.status === "COMPLETED" ? "text-blue-700 bg-blue-200 px-2 py-0.5 rounded-md"
+                          : booking.status === "DECLINED" && "text-white bg-red-600 px-2 py-0.5 rounded-md"}
                     >
                       {booking.status}
                     </span>
