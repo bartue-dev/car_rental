@@ -34,7 +34,7 @@ export function DeleteBookingAlert({bookingId, setBookings, setIsDeleteDialogOpe
     }
   }
   return (
-    <AlertDialogContent>
+    <AlertDialogContent className="font-poppins">
       <AlertDialogHeader>
         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
         <AlertDialogDescription>
