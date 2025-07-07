@@ -5,7 +5,7 @@ function QuickActions() {
   const navigate = useNavigate();
 
   const toBookings = () => {
-    navigate("/dashboard/admin/bookings")
+    navigate("/dashboard/admin/bookings/add-booking")
   }
 
   const toVehicles = () => {
