@@ -1,11 +1,11 @@
-import VehiclesData from "@/components/dashboard/vehiclesData";
+import Vehicles from "@/components/dashboard/vehicles";
 
 
 function AdminVehicles() {
 
   return(
     <div>
-      <VehiclesData/>
+      <Vehicles/>
     </div>
   )
 }
