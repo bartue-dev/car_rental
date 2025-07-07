@@ -8,14 +8,13 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { ClipboardPlus } from 'lucide-react';
-
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { useEffect, useState } from "react"
 import BookingActions from "../subComponents/bookingsActions"
 
 export function BookingTable() {
   const [bookings, setBookings] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const axiosPrivate = useAxiosPrivate();
 
@@ -25,9 +24,11 @@ export function BookingTable() {
 
     const getAllBookings = async () => {
       try {
-        const response = await axiosPrivate("/v1/booking-admin", {signal: controller.signal});
+        const bookings = await axiosPrivate.get("/v1/booking-admin", {signal: controller.signal});
+        const vehicles = await axiosPrivate.get("/v1/vehicle-admin", {signal: controller.signal});
 
-        setBookings(response?.data?.data?.bookingsDetails);
+        setBookings(bookings?.data?.data?.bookingsDetails);
+        setVehicles(vehicles?.data?.data?.vehicleDetails)
 
       } catch (error) {
         console.error(error)
@@ -42,32 +43,29 @@ export function BookingTable() {
     return () => controller.abort();
   },[axiosPrivate])
 
+  useEffect(() => {
+    console.log("BOOKINGS: ", bookings);
+    console.log("VEHICLES: ", vehicles);
+  }, [bookings, vehicles])
+
 
   return (
     <div>
-      <div className="mb-5">
-        <h1 className="text-sm">Quick Actions</h1>
-        <div className="flex justify-between items-center gap-5 mt-2">
-          <div className="border rounded-sm w-60 h-20 p-5 flex items-center gap-5 shadow-xs cursor-pointer">
-            <ClipboardPlus size={35} strokeWidth={1}/>
-            <div>
-              <h1 className="text-sm">Add Bookings</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="border rounded-md shadow-sm p-2">
+      <div className="border rounded-md shadow-sm p-2 font-poppins">
         <h1  className="p-3 font-semibold tracking-wide border-b-1">List of Bookings</h1>
         {isLoading
           ? <p className="text-center italic">Retrieving list of bookings. Please wait </p>
-          :  <Table >
+          : (bookings.length > 0 && vehicles.length > 0) 
+          && <div className="max-h-[400px] overflow-auto">
+              <Table>
               <TableCaption>A list of Bookings.</TableCaption>
               <TableHeader>
-                <TableRow>
+                <TableRow className="bg-gray-200">
                   <TableHead>Name</TableHead>
                   <TableHead>Address</TableHead>
                   <TableHead>Phone #</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -80,7 +78,8 @@ export function BookingTable() {
                       <span 
                         className={booking.status === "PENDING" ? "text-yellow-700 bg-amber-200 px-2 py-0.5 rounded-md" 
                           : booking.status === "CONFIRM" ? "text-green-700 bg-green-200 px-2 py-0.5 rounded-md" 
-                          : booking.status === "COMPLETED" && "text-blue-700 bg-blue-200 px-2 py-0.5 rounded-md"}
+                          : booking.status === "COMPLETED" ? "text-blue-700 bg-blue-200 px-2 py-0.5 rounded-md"
+                          : booking.status === "DECLINED" && "text-white bg-red-600 px-2 py-0.5 rounded-md"}
                       >
                         {booking.status}
                       </span>
@@ -88,13 +87,15 @@ export function BookingTable() {
                     <TableCell>
                       <BookingActions
                         {...booking}
+                        vehicles={vehicles}
                         setBookings={setBookings}
                       />
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
-            </Table>}
+            </Table>
+            </div>}
       
       </div>
     </div>
