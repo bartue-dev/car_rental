@@ -12,9 +12,9 @@ function WeeklySummary() {
 
     const getVehicle = async () => {
       try {
-        const vehicles = await axiosPrivate("/v1/vehicle-admin", {signal: controller.signal});
-        const bookings = await axiosPrivate("/v1/booking-admin", {signal: controller.signa});
-        const testimonials = await axiosPrivate("/v1/testimonials-admin", {signal: controller.signa});
+        const vehicles = await axiosPrivate.get("/v1/vehicle-admin", {signal: controller.signal});
+        const bookings = await axiosPrivate.get("/v1/booking-admin", {signal: controller.signa});
+        const testimonials = await axiosPrivate.get("/v1/testimonials-admin", {signal: controller.signa});
 
         const items = {
           vehicles: vehicles?.data?.data?.totalItems,
