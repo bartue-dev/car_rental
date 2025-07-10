@@ -1,4 +1,4 @@
-import { BookingTable } from "@/components/dashboard/bookingTable";
+import { BookingTable } from "@/components/dashboard/bookingComponents/bookingTable";
 import { Outlet, useLocation, Link } from "react-router-dom";
 import { ClipboardPlus } from 'lucide-react';
 
