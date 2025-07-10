@@ -18,9 +18,9 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import { useState } from "react"
-import { EditFormDialog } from '../dashboard/editFormDialog';
-import { DeleteBookingAlert } from '../dashboard/deleteBookingAlert';
-import BookingDetails from '../dashboard/bookingDetails';
+import { EditFormDialogBooking } from '../dashboard/bookingComponents/editFormDialogBooking';
+import { DeleteBookingAlert } from '../dashboard/bookingComponents/deleteBookingAlert';
+import BookingDetails from '../dashboard/bookingComponents/bookingDetails';
 
 function BookingActions({setBookings, vehicles, ...booking}) {
   const [isBookingDetailsOpen, setIsBookingDetailsOpen] = useState(false);
@@ -30,7 +30,9 @@ function BookingActions({setBookings, vehicles, ...booking}) {
   return (
     <div>
       <DropdownMenu>
-        <DropdownMenuTrigger className="cursor-pointer"><Ellipsis/></DropdownMenuTrigger>
+        <DropdownMenuTrigger className="cursor-pointer">
+          <Ellipsis/>
+        </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
@@ -68,7 +70,7 @@ function BookingActions({setBookings, vehicles, ...booking}) {
 
       {/* Edit form dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <EditFormDialog
+        <EditFormDialogBooking
           {...booking}
           vehicles={vehicles}
           setBookings={setBookings}
