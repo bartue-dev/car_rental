@@ -1,5 +1,5 @@
 import QuickActions from '@/components/dashboard/quickActions';
-import RecentBookings from '@/components/dashboard/recentBookingTable';
+import RecentBookings from '@/components/dashboard/bookingComponents/recentBookingTable';
 import WeeklySummary from '@/components/dashboard/weeklySummary';
 
 function Main() {
