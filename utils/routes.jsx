@@ -15,7 +15,7 @@ import Main from "@/Pages/protectedRoute/admin/main";
 import Bookings from "@/Pages/protectedRoute/admin/bookings";
 import AdminVehicles from "@/Pages/protectedRoute/admin/admin-vehicles";
 import AdminTestimonials from "@/Pages/protectedRoute/admin/admin-testimonials";
-import AddBooking from "@/components/dashboard/addBooking";
+import AddBooking from "@/components/dashboard/bookingComponents/addBooking";
 
 const router = createBrowserRouter([
   {
