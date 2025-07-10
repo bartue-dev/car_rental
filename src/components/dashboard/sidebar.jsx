@@ -55,7 +55,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent className="px-2">
         <SidebarGroup className="border-b">
-          <SidebarHeader>Application</SidebarHeader>
+          <SidebarHeader>Admin Panel</SidebarHeader>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
