@@ -45,7 +45,6 @@ export function EditFormDialogVehicle({setVehicles, ...vehicle}) {
 
       let imageData;
       if (file.name) {
-        console.log("FILE UPLOADED")
         imageData = (await axiosPrivate.put(`/v1/images-admin/${vehicle.images[0]?.imageId}/vehicle/${vehicle.vehicleId}`, 
           {file},
           {headers: {"Content-Type": "multipart/form-data"}}
@@ -110,7 +109,7 @@ export function EditFormDialogVehicle({setVehicles, ...vehicle}) {
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="price">Price</Label>
-                <Input id="price" name="price" defaultValue={vehicle.price} />
+                <Input id="price" name="price" type="number" defaultValue={vehicle.price} />
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="file">Image</Label>
