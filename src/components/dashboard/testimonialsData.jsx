@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { CircleX, SquareMousePointer } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 import useLogout from "@/hooks/useLogout";
+import { Button } from "../ui/button";
+import { getRandomColor } from "../../../utils/randomColor";
 
 function TestimonialsData() {
   const [testimonials, setTestimonials] = useState([]);
@@ -40,40 +42,60 @@ function TestimonialsData() {
     return () => controller.abort();
   }, [axiosPrivate])
 
+  const handleDeleteTestimonial = async (testimonialId) => {
+    try {
+      await axiosPrivate.delete(`/v1/testimonials-admin/${testimonialId}`);
+
+      setTestimonials(prev => (
+        prev.filter(item => {
+          return item.testimonialId !== testimonialId
+        })
+      ))
+
+    } catch (error) {
+      console.error(error)
+    }
+  } 
+
   return (
     <div>
-      <div className="mb-5">
-        <h1 className="text-sm">Quick Actions</h1>
-        <div className="flex justify-between items-center gap-5 mt-2">
-          <div className="border rounded-sm w-60 h-20 p-5 flex items-center gap-5 shadow-xs cursor-pointer">
-            <SquareMousePointer size={35} strokeWidth={1}/>
-            <div>
-              <h1 className="text-sm">Select testimonials</h1>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1 className="place-self-center font-semibold italic mb-5" >Pick Testimonials to Highlight on the Homepage</h1>
       {isLoading
         ? <p className="text-center italic">Retrieving testimonials data. Please wait!</p>
         : error 
         ? <p className="text-center italic">Sorry unable to retrieve testimonials data</p>
-        : <div className="grid grid-cols-2 gap-3">
+        : <div className="grid grid-cols-3 gap-8">
+
             {testimonials?.map((testimonial) => (
               <div 
                 key={testimonial.testimonialId}
-                className="border rounded-md p-5 flex flex-col gap-2 relative"
+                className="border rounded-md p-5 flex flex-col justify-between gap-2 shadow-md relative"
               >
                 <div className="flex items-center gap-2">
-                  <div className="rounded-full w-10 h-10 bg-blue-400 text-white font-semibold flex items-center justify-center">
+                  <div 
+                    className="rounded-full w-10 h-10 text-white font-semibold flex items-center justify-center"
+                    style={{backgroundColor: getRandomColor()}}
+                  >
                     {testimonial?.user?.username.split("")[0].toUpperCase()}                  
                   </div>
                   <h1>{testimonial?.user?.username}</h1>
                 </div>
-                <div className="ml-12">
+                <div className="text-sm leading-7 ml-12 flex-grow">
                   <p>{testimonial?.content}</p>
                 </div>
+                <div>
+                  <Button 
+                    variant="outline"
+                    className="w-full shadow-sm cursor-pointer bg-cyan-600 text-white"
+                  >
+                    Select
+                  </Button>
+                </div>
                 <div className="absolute top-3 right-2 cursor-pointer">
-                 <CircleX strokeWidth={1}/>
+                 <CircleX 
+                  strokeWidth={1}
+                  onClick={() => handleDeleteTestimonial(testimonial.testimonialId)}
+                  />
                 </div>
               </div>
             ))}
