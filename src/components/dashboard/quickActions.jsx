@@ -9,7 +9,7 @@ function QuickActions() {
   }
 
   const toVehicles = () => {
-    navigate("/dashboard/admin/vehicles")
+    navigate("/dashboard/admin/vehicles/add-vehicle")
   }
 
   const toTestimonials = () => {
