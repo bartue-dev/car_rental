@@ -16,6 +16,7 @@ import Bookings from "@/Pages/protectedRoute/admin/bookings";
 import AdminVehicles from "@/Pages/protectedRoute/admin/admin-vehicles";
 import AdminTestimonials from "@/Pages/protectedRoute/admin/admin-testimonials";
 import AddBooking from "@/components/dashboard/bookingComponents/addBooking";
+import AddVehicle from "@/components/dashboard/vehiclesComponents/addVehicle";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
                     { path: "add-booking", element: <AddBooking/>}
                   ]
                 },
-                { path: "admin/vehicles", element: <AdminVehicles />},
+                { path: "admin/vehicles", element: <AdminVehicles />,
+                  children: [
+                    { path: "add-vehicle", element: <AddVehicle/>}
+                  ]
+                },
                 { path: "admin/testimonials", element: <AdminTestimonials />},
               ]
             },
