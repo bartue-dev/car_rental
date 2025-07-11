@@ -13,10 +13,6 @@ function Vehicles() {
   const logout = useLogout();
 
   useEffect(() => {
-    console.log("Vehicles state: ", vehicles)
-  }, [vehicles])
-
-  useEffect(() => {
     const controller = new AbortController();
 
     const getVehicles = async () => {
@@ -44,6 +40,22 @@ function Vehicles() {
 
     return () => controller.abort();
   }, [axiosPrivate])
+
+  const handleDeleteVehicle = async (vehicleId) => {
+    try {
+      await axiosPrivate.delete(`/v1/vehicle-admin/${vehicleId}`);
+      await axiosPrivate.delete(`/v1/images-admin/vehicle/${vehicleId}`);
+
+      setVehicles(prev => (
+        prev.filter(item => {
+          return item.vehicleId !== vehicleId
+        })
+      ))
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div>
@@ -99,6 +111,7 @@ function Vehicles() {
                         </button>
                         <button 
                           className="outline-none border-1 py-1 cursor-pointer bg-red-600 text-xs rounded-2xl w-30 text-stone-100"
+                          onClick={() => handleDeleteVehicle(vehicle.vehicleId)}
                         >
                           Delete
                         </button>
