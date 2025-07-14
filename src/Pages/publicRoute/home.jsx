@@ -1,5 +1,6 @@
 import Hero from "@/components/home/hero";
 import Vehicles from "@/components/home/vehicles";
+import HomeTestimonials from "@/components/testimonials/homeTestimonials";
 import useAuth from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,9 @@ function Home() {
       </div>
       <div>
         <Vehicles />
+      </div>
+      <div>
+        <HomeTestimonials/>
       </div>
     </div>
   )
