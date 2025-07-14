@@ -66,7 +66,6 @@ function BookingForm({vehicleId, setVehicleId}) {
       //pickupDateTime for backend query
       const formatedDate = format(new Date(pickupDate), "MM/dd/yyyy")
       const pickupDateTime = `${formatedDate}, ${formData.get("pickupTime")}`
-      console.log(pickupDateTime)
 
       //backend
       await axiosPrivate.post("/v1/booking-admin",
