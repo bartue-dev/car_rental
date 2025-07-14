@@ -1,4 +1,4 @@
-import TestimonialsData from "@/components/dashboard/testimonialsData"
+import TestimonialsData from "@/components/dashboard/testimonials/testimonialsData"
 
 function AdminTestimonials() {
 
