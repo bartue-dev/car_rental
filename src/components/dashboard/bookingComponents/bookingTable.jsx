@@ -43,12 +43,6 @@ export function BookingTable() {
     return () => controller.abort();
   },[axiosPrivate])
 
-  useEffect(() => {
-    console.log("BOOKINGS: ", bookings);
-    console.log("VEHICLES: ", vehicles);
-  }, [bookings, vehicles])
-
-
   return (
     <div>
       <div className="border rounded-md shadow-sm p-2 font-poppins">
