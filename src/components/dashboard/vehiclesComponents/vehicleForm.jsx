@@ -13,12 +13,16 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import useAxiosPrivate from "@/hooks/useAxiosPrivate"
 import { Loader2Icon } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import useLogout from "@/hooks/useLogout"
 
 function VehicleForm() {
   const [getStatus, setStatus] = useState("Available");
   const [errMsg, setErrMsg] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const logout = useLogout();
   const allowedImgTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif", "image/svg"]
 
   const handleSubmit = async (e) => {
@@ -29,8 +33,6 @@ function VehicleForm() {
     try {
       let validationMsg = {}
       const formData = new FormData(e.target);
-
-      console.log("FORMDATA: ", Object.fromEntries(formData))
 
       const name = formData.get("name");
       if (name.length <= 2) {
@@ -70,8 +72,6 @@ function VehicleForm() {
         name, type, status, price
       }))?.data?.data?.vehicleDetails;
 
-      console.log("VEHICLE RESPONSE:", vehicleResponse);
-
       const imageFormData = new FormData();
       imageFormData.append("file", file)
 
@@ -85,6 +85,13 @@ function VehicleForm() {
 
     } catch (error) {
       console.error(error)
+
+       /* check if user is unauthorized */
+      if (error?.status === 403) {
+        navigate("/login");
+        await logout();
+      }
+
     } finally {
       setIsLoading(false)
     }
