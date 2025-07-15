@@ -51,6 +51,11 @@ function ProfileStatus() {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/bookings-user" className="text-sm hover:bg-primary hover:text-white">
+                    My bookings
+                  </Link>
+                </li>
+                <li>
                   <a onClick={handleLogout} className="text-sm hover:bg-primary hover:text-white">
                     Logout
                   </a>
