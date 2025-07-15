@@ -21,6 +21,8 @@ function TestimonialsData() {
       try {
         const response = await axiosPrivate.get("/v1/testimonials-admin", { signal: controller.signal });
 
+        console.log("Testimonials Data:", response)
+
         setTestimonials(response?.data?.data?.allTestimonials)
       } catch (error) {
 
@@ -60,15 +62,40 @@ function TestimonialsData() {
 
   const handleSelectTestimonial = async (testimonialId) => {
     try {
-      console.log("SELECT BUTTON CLICKED!")
-      const response = await axiosPrivate.post(`/v1/selectedTestimonials-admin/${testimonialId}`);
+      const isSelected = true
+      await axiosPrivate.post(`/v1/selectedTestimonials-admin/${testimonialId}`);
+      const testimonialsUpdate = await axiosPrivate.put(`/v1/testimonials-admin/${testimonialId}`, {isSelected});
 
-      console.log("SELECTED TESIMONIALS:", response)
+      console.log("IS SELECTED:", testimonialsUpdate)
 
+      setTestimonials(prev => (
+        prev.map(item => {
+          return item.testimonialId === testimonialId ? {...item, isSelected: isSelected} : item
+        })
+      ))
+    
     } catch (error) {
       console.error(error)
     }
   }
+
+  const handleDeselectTestimonial = async (testimonialId) => {
+    try {
+      const isSelected = false
+      await axiosPrivate.put(`/v1/testimonials-admin/${testimonialId}`, {isSelected});
+      await axiosPrivate.delete(`/v1/selectedTestimonials-admin/${testimonialId}`)
+
+      setTestimonials(prev => (
+        prev.map(item => {
+          return item.testimonialId === testimonialId ? {...item, isSelected: isSelected} : item
+        })
+      ))
+  
+      console.log("Handle Deselect button!")
+    } catch (error) {
+      console.error(error)
+    }
+  } 
 
   return (
     <div>
@@ -97,13 +124,21 @@ function TestimonialsData() {
                   <p>{testimonial?.content}</p>
                 </div>
                 <div>
-                  <Button 
-                    variant="outline"
-                    className="w-full shadow-sm cursor-pointer bg-cyan-600 text-white"
-                    onClick={() => handleSelectTestimonial(testimonial.testimonialId)}
-                  >
-                    Select
-                  </Button>
+                  {testimonial.isSelected
+                    ? <Button 
+                        variant="destructive"
+                        className="w-full shadow-sm cursor-pointer text-white"
+                        onClick={() => handleDeselectTestimonial(testimonial.testimonialId)}
+                      >
+                        Deselect
+                      </Button>
+                    : <Button 
+                        className="w-full shadow-sm cursor-pointer bg-cyan-600 text-white"
+                        onClick={() => handleSelectTestimonial(testimonial.testimonialId)}
+                      >
+                        Select
+                      </Button>}
+                  
                 </div>
                 <button className="absolute top-3 right-2 cursor-pointer">
                  <CircleX 
