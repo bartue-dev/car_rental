@@ -1,7 +1,7 @@
-import AutoLogout from "./components/autoLogout"
-import Navbar from "./components/navbar"
+import AutoLogout from "./components/common/autoLogout"
+import Navbar from "./components/common/navbar"
 import { Outlet } from "react-router-dom"
-import Footer from "./components/footer"
+import Footer from "./components/common/footer"
 import useAuth from "./hooks/useAuth"
 
 function App() {
