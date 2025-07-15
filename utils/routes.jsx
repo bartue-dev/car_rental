@@ -17,6 +17,7 @@ import AdminVehicles from "@/Pages/protectedRoute/admin/admin-vehicles";
 import AdminTestimonials from "@/Pages/protectedRoute/admin/admin-testimonials";
 import AddBooking from "@/components/dashboard/bookingComponents/addBooking";
 import AddVehicle from "@/components/dashboard/vehiclesComponents/addVehicle";
+import BookingsUser from "@/components/booking/bookingsUser";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
         children: [
         { element: <RequiredAuth allowedRole="ADMIN"/>,
           children: [
-            { path: "/dashboard", element: <Dashboard/>,
+            { path: "dashboard", element: <Dashboard/>,
               children: [
                 { index: true, element: <Main />},
                 { path: "main", element: <Main />},
@@ -52,12 +53,16 @@ const router = createBrowserRouter([
                 { path: "admin/testimonials", element: <AdminTestimonials />},
               ]
             },
-            
           ]},
         { element: <RequiredAuth allowedRole="USER"/>,
           children: [
             { path: "testimonials", element: <TestimonialForm />},
-          ]}
+          ]},
+        { element: <RequiredAuth allowedRole="USER"/>, 
+          children: [
+            { path: "bookings-user", element: <BookingsUser/>}
+          ]
+        }
         ]},
     ]
   }, 
