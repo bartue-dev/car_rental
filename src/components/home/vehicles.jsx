@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 function Vehicles() {
   const [vehicles, setVehicles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [pagination, setPagination] = useState({
     totalPage: 0,
     currentPage: 1
@@ -32,6 +33,8 @@ function Vehicles() {
 
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -45,8 +48,9 @@ function Vehicles() {
     <div className="px-18 py-5">
       <h1 className="place-self-center text-4xl font-semibold ">VEHICLES</h1>
       <div className="grid grid-cols-3 gap-8 mt-10  place-items-center px-20 mb-8">
-      {vehicles
-        && vehicles.map(vehicle => {
+      {isLoading
+        ? <p className="text-sm italic">Retrieving vehicles data. Please wait..</p>
+        : vehicles.map(vehicle => {
           return (  
                 /* card */
               <div key={vehicle.vehicleId} className=" rounded-xl shadow-sm w-70 h-90 p-3 flex flex-col justify-between bg-base-100">
