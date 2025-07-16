@@ -18,6 +18,7 @@ import AdminTestimonials from "@/Pages/protectedRoute/admin/admin-testimonials";
 import AddBooking from "@/components/dashboard/bookingComponents/addBooking";
 import AddVehicle from "@/components/dashboard/vehiclesComponents/addVehicle";
 import BookingsUser from "@/components/booking/bookingsUser";
+import About from "@/Pages/publicRoute/about";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "home", element: <Home /> },
       { path: "vehicles", element: <Vehicles />},
+      { path: "about", element: <About />},
       { path: "vehicle-details/:vehicleId", element: <VehicleDetails />},
 
       // Private routes can be added here
