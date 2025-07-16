@@ -58,17 +58,17 @@ function AddBooking() {
         : error
         ? <p className="text-center italic">{error}</p>
         : <div 
-            className="grid grid-cols-1 gap-4 h-137 overflow-auto border p-2 rounded-md" style={{ scrollbarColor: "light-gray relative", scrollbarWidth: "thin"}}
+            className="flex flex-col gap-4 h-137 overflow-auto border p-2 rounded-md" style={{ scrollbarColor: "light-gray relative", scrollbarWidth: "thin"}}
           >
             <h1 className="absolute top-5 left-34 text-sm italic font-semibold">Please select one vehicle at a time</h1>
             {vehicles?.map((vehicle) => (
-              <div key={vehicle.vehicleId} className="flex items-center">
+              <div key={vehicle.vehicleId} className="flex items-center shadow-sm">
                 
                 <div className="border rounded-sm rounded-r-none p-4 bg-base-300 w-65 h-40">
-                  <img src={vehicle?.images[0].url} alt="car" className="w-full h-full object-contain"/>
+                  <img src={vehicle?.images[0]?.url} alt="car" className="w-full h-full object-contain"/>
                 </div>
                 <div 
-                  className="border border-l-0 rounded-sm rounded-l-none h-full w-full flex flex-col justify-center"
+                  className="border border-l-0 rounded-sm rounded-l-none h-40 w-full flex flex-col justify-center"
                 >
                   <div
                     className="flex flex-col ml-2 gap-5"
