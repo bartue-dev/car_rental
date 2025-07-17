@@ -52,7 +52,7 @@ function ContactUs() {
   }
 
   return (
-    <div className="flex gap-20 items-center bg-gray-100 px-30 p-6">
+    <div className="flex gap-20 items-center bg-gray-100 px-30 p-6 mt-20">
       <Toaster position="top-center"/>
       <form onSubmit={handleOnSubmit}>
         <h1 className="text-xl" >Contact Us</h1>
