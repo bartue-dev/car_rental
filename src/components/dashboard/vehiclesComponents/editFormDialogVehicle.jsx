@@ -53,14 +53,14 @@ export function EditFormDialogVehicle({setVehicles, ...vehicle}) {
         imageData = vehicle.images[0];
       }
 
-      const data = {...vehicleData.data?.data?.vehicleDetails, images: [imageData]};
+      const updatedVehicle = {...vehicleData, images: [imageData]};
 
       setVehicles(prev => (
         prev.map((item) => {
           return item.vehicleId === vehicle.vehicleId 
             ? {
               ...item,
-              ...data
+              ...updatedVehicle
             }
             : item 
         })
