@@ -29,10 +29,6 @@ export function EditFormDialogBooking({setBookings, setIsEditDialogOpen, status,
   const [pickupDate, setPickupDate] = useState(booking.pickupDateTime.split(", ")[0])
   const [vehicleId, setVehicleId] = useState(booking.vehicleId)
 
-  // useEffect(() => {
-  //   console.log("pickupDate", pickupDate)
-  // },[])
-
   /* update booking function */
   const handleSaveDialog = async (e) => {
     e.preventDefault();
