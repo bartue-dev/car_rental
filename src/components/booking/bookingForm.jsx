@@ -49,7 +49,6 @@ function BookingForm({vehicleId}) {
       const now = format(new Date(), "MM/dd/yyyy");
       
       if (!pickupDate) {
-        console.log("TURUE")
         validationMsg.pickupDate = "Select Pickup Date"
       } else if (format(new Date(pickupDate), "MM/dd/yyyy") < now) {
         validationMsg.pickupDate = "Date must be today or later"
