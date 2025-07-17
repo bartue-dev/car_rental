@@ -13,9 +13,11 @@ import { SquareUser,
 } from 'lucide-react';
 
 import { Button } from "../ui/button";
+import { EditFormDialogMyBookings } from "./editFormDialogMyBookings";
 
 function BookingsUser() {
   const [userBookings, setUserBookings] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
   const axiosPrivate = useAxiosPrivate();
 
@@ -25,9 +27,16 @@ function BookingsUser() {
     const getUserBookings = async () => {
       try {
         const response = await axiosPrivate.get("/v1/booking", {signal: controller.signal});
+        const vehicleData = await axiosPrivate.get("/v1/vehicle", {signal: controller.signal});
 
-        console.log("USER BOOKINGS:", response)
+        let vehicles = []
+        for (const vehicle of vehicleData.data.data.vehicleDetails) {
+          if (vehicle.status === "Available") {
+            vehicles.push(vehicle)
+          }
+        }
 
+        setVehicles(vehicles)
         setUserBookings(response?.data?.data?.bookingsDetails)
       } catch (error) {
         console.error(error)
@@ -60,7 +69,7 @@ function BookingsUser() {
       {isLoading
         ? <p className="text-sm italic">Retrieving Bookings. Please wait...</p>
         : <div>
-            <h1 className="text-center mb-4 font-semibold text-xl">My Bookings</h1>
+            <h1 className="text-center mb-6 font-semibold text-2xl">My Bookings</h1>
             <div className="grid grid-cols-2 justify-items-center gap-8 w-310 place-self-center">
               {userBookings.map(booking => (
                 <div key={booking.bookingId} className="grid grid-cols-2 gap-2 border rounded-md shadow-md p-4 w-150">
@@ -120,11 +129,17 @@ function BookingsUser() {
                   <h1> : {booking.vehicle.price.toLocaleString()} </h1>
 
                   <div className="flex gap-3 mt-5">
-                    <Button className="bg-sky-700 w-20 cursor-pointer hover:bg-sky-800">Edit</Button>
+                    <div>
+                      <EditFormDialogMyBookings
+                        {...booking}
+                        vehicles={vehicles}
+                      />
+                    </div>
                     <Button 
                       variant="outline" 
                       className="w-20 cursor-pointer"
                       onClick={() => handleDeleteUserBooking(booking.bookingId)}
+                      disabled={booking.status === "CONFIRM" || booking.status === "COMPLETED"}
                     >
                       Delete
                     </Button>
