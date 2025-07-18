@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link } from "react-router-dom"
 
-export function LoginForm({onSubmit, serverErrMsg}) {
+export function LoginForm({onSubmit, serverErrMsg, setIsGuest, setIsAdmin, formRef}) {
   return (
     <div className={cn("flex flex-col gap-6")}>
       <Card>
@@ -27,19 +27,35 @@ export function LoginForm({onSubmit, serverErrMsg}) {
         {Object.keys(serverErrMsg).length > 0
           && <p className="text-sm text-red-600 mb-5">{serverErrMsg.failed}</p> 
         }
-          <form onSubmit={onSubmit}>
+          <form ref={formRef} onSubmit={onSubmit}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
                 <Label htmlFor="username" className="text-base">Username</Label>
-                <Input id="username" type="text" name="username" className="py-5" required/>
+                <Input id="username" type="text" name="username" className="py-5"/>
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="password" className="text-base">Password</Label>
-                <Input id="password" type="password" name="password" className="py-5" required/>
+                <Input id="password" type="password" name="password" className="py-5"/>
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full text-base py-5">
                   Login
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full text-base py-5 shadow-md cursor-pointer"
+                  type="button"
+                  onClick={() => setIsGuest(true)}
+                >
+                  Login as guest
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full text-base py-5 shadow-md cursor-pointer"
+                  type="button"
+                  onClick={() => setIsAdmin(true)}
+                >
+                  Login as admin
                 </Button>
               </div>
             </div>
