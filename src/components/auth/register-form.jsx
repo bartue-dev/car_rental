@@ -70,7 +70,7 @@ export function RegisterForm({onSubmit, serverError, errorMsg}) {
                 <button
                   type="button"
                   onClick={togglePassword}
-                  className="absolute right-3 top-11"
+                  className="absolute right-3 top-11 cursor-pointer"
                 >
                   {showPassword
                     ? <Eye/>
