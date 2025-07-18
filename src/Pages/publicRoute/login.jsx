@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import { useNavigate, } from "react-router-dom";
@@ -6,6 +6,9 @@ import { LoginForm } from "@/components/auth/login-form";
 
 function Login() {
   const [serverErrMsg, setServerErrMsg] = useState({});
+  const [isGuest, setIsGuest] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const formRef = useRef(null)
   const { setAuth, setUser } = useAuth();
 
   const navigate = useNavigate();
@@ -20,9 +23,19 @@ function Login() {
       //FormData api
       const formData = new FormData(e.target);
 
+      if (isGuest) {
+        formData.append("username", "bartue");
+        formData.append("password", "Mutya28!")
+        setIsGuest(false);
+      } else if (isAdmin) {
+        formData.append("username", "Admin");
+        formData.append("password", "Admin12345!")
+        setIsAdmin(false);
+      }
+
       //get the username and password form formData
-      const username = formData.get("username");
-      const password = formData.get("password");
+      const credentials = Object.fromEntries(formData)
+      const username = credentials.username
 
       //clear the previous serverErrMsg 
       setServerErrMsg({})
@@ -30,7 +43,7 @@ function Login() {
       //post credentials to log in endpoint
       const response = await axios.post(
         "/v1/login",
-        {username, password},
+        credentials,
         {
           headers : {"Content-Type" : "application/json"},
           withCredentials: true //set to true as it is set to the backend
@@ -67,6 +80,7 @@ function Login() {
       //reset the form after successfull log in
       e.target.reset();
     } catch (error) {
+      console.error(error)
       //validation message obj variable
       let validationMsg = {}
 
@@ -92,12 +106,22 @@ function Login() {
     }
   }
 
+  //trigger the form to submit if isGuest or isAdmin is true along with the formRef
+  useEffect(() => {
+    if ((isGuest || isAdmin) && formRef.current) {
+      formRef.current.requestSubmit();
+    }
+  }, [isGuest, isAdmin])
+
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
       <LoginForm 
         onSubmit={handleSubmit}
         serverErrMsg={serverErrMsg}
+        setIsGuest={setIsGuest}
+        setIsAdmin={setIsAdmin}
+        formRef={formRef}
       />
       </div>
     </div>
