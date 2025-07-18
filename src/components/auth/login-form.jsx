@@ -10,8 +10,16 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link } from "react-router-dom"
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from "react"
 
 export function LoginForm({onSubmit, serverErrMsg, setIsGuest, setIsAdmin, formRef}) {
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePassword = () => {
+    setShowPassword(prev => !prev)
+  }
+
   return (
     <div className={cn("flex flex-col gap-6")}>
       <Card>
@@ -33,9 +41,18 @@ export function LoginForm({onSubmit, serverErrMsg, setIsGuest, setIsAdmin, formR
                 <Label htmlFor="username" className="text-base">Username</Label>
                 <Input id="username" type="text" name="username" className="py-5"/>
               </div>
-              <div className="grid gap-3">
+              <div className="grid gap-3 relative">
                 <Label htmlFor="password" className="text-base">Password</Label>
-                <Input id="password" type="password" name="password" className="py-5"/>
+                <Input id="password" type={showPassword ? "text" : "password"} name="password" className="py-5"/>
+                <button
+                  type="button"
+                  onClick={togglePassword}
+                  className="absolute top-11 right-3 cursor-pointer"
+                >
+                  {showPassword
+                    ? <Eye/>
+                    : <EyeOff/>}
+                </button>
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full text-base py-5">
