@@ -1,12 +1,12 @@
 import QuickActions from '@/components/dashboard/quickActions';
 import RecentBookings from '@/components/dashboard/bookingComponents/recentBookingTable';
-import WeeklySummary from '@/components/dashboard/weeklySummary';
+import DataSummary from '@/components/dashboard/dataSummary';
 
 function Main() {
 
   return (
     <div >
-      <WeeklySummary/>
+      <DataSummary/>
       <RecentBookings/>
       <QuickActions/>
     </div>
