@@ -8,7 +8,7 @@ function App() {
   const { user } = useAuth();
 
   return (
-    <div className="w-full h-screen flex flex-col font-poppins text-gray-800">
+    <div className="h-screen flex flex-col font-poppins text-gray-800">
       <AutoLogout/>
 
       {user?.role !== "ADMIN" 
