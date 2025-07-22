@@ -24,8 +24,8 @@ function Login() {
       const formData = new FormData(e.target);
 
       if (isGuest) {
-        formData.append("username", "bartue");
-        formData.append("password", "Mutya28!")
+        formData.append("username", "Guest");
+        formData.append("password", "Guest123!")
         setIsGuest(false);
       } else if (isAdmin) {
         formData.append("username", "Admin");
