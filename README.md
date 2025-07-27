@@ -52,7 +52,6 @@
         -   [x] booking submission logic
     -   [x] for admin(role) components
         -   [ ] admin dashboard
-            -   [ ] vehicles data manipulation (CRUD)
-            -   [ ] manipulate testimonials data (CRUD)
-            -   [ ] manipulate bookings data (CRUD)
-            -   [ ] able to create booking
+            -   [x] vehicles data manipulation (CRUD)
+            -   [x] manipulate testimonials data (CRUD)
+            -   [x] manipulate bookings data (CRUD)

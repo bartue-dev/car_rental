@@ -92,6 +92,11 @@ function VehicleForm() {
         await logout();
       }
 
+      if (error?.response?.data?.errors?.error === "Duplicate") {
+        toast.error("Vihicle already exist")
+        return;
+      }
+
     } finally {
       setIsLoading(false)
     }
