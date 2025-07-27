@@ -51,7 +51,7 @@
         -   [x] testimonials form with logic
         -   [x] booking submission logic
     -   [x] for admin(role) components
-        -   [ ] admin dashboard
+        -   [x] admin dashboard
             -   [x] vehicles data manipulation (CRUD)
             -   [x] manipulate testimonials data (CRUD)
             -   [x] manipulate bookings data (CRUD)
