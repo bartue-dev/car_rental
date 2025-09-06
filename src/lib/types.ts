@@ -1,4 +1,9 @@
-import React, { type ReactNode } from "react";
+import React, { type ReactNode, type RefObject } from "react";
+import type {
+  UseFormRegister,
+  UseFormHandleSubmit,
+  FieldErrors
+} from "react-hook-form"
 
 /* auth-provider types */
 export type AuthProviderProps = {
@@ -28,12 +33,6 @@ export type AuthContextType = {
 
 
 /* Register types */
-import type {
-  UseFormRegister,
-  UseFormHandleSubmit,
-  FieldErrors
-} from "react-hook-form"
-
 type RegisterData = {username: string, password: string}
 
 export type RegisterPropsType = {
@@ -44,3 +43,19 @@ export type RegisterPropsType = {
   isSubmitting: boolean,
   serverError: {error?: string}
 }
+/* --------- */
+
+/* Login types */
+type LoginData = {username: string, password: string}
+
+export type LoginPropsType = {
+  onSubmit: (data: LoginData) => Promise<void>,
+  handleSubmit: UseFormHandleSubmit<LoginData>,
+  register: UseFormRegister<LoginData>,
+  errors: FieldErrors<LoginData>,
+  isSubmitting: boolean,
+  serverError: {error?: string}
+  formRef: RefObject<HTMLFormElement | null>
+}
+/* -------- */
+
