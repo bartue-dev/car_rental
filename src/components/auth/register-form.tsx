@@ -30,7 +30,7 @@ export default function RegisterForm({
         <CardHeader>
           <CardTitle className="text-xl"> <span className="underline underline-offset-2">Register</span> an account</CardTitle>
           <CardDescription>
-            Enter your username and password below to create to your account
+            Enter your username and password below to <span className="font-semibold">register</span> to your account
           </CardDescription>
         </CardHeader>
         <CardContent>
