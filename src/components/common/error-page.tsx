@@ -23,7 +23,7 @@ export default function ErrorPage() {
                 <span className="sr-only">{error.statusText || error.message}</span>404
             </h2>
             <p className="text-2xl md:text-3xl dark:text-gray-300">Sorry, we couldn't find this page.</p>
-            <button onClick={goBack} className="px-8 py-4 text-xl font-semibold rounded bg-purple-600 text-gray-50 hover:text-gray-200 cursor-pointer">Back to home</button>
+            <button onClick={goBack} className="px-8 py-4 text-xl font-semibold rounded bg-purple-600 text-gray-50 hover:text-gray-200 cursor-pointer">Back</button>
         </div>
     </div>
 </section>
