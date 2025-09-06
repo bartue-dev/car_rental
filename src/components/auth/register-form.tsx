@@ -11,8 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 import type { RegisterPropsType } from "@/lib/types"
-import { Eye, EyeOff, LoaderCircle } from "lucide-react"
-import { useState } from "react"
+import { LoaderCircle } from "lucide-react"
 import { Link } from "react-router-dom"
 
 
@@ -24,16 +23,14 @@ export default function RegisterForm({
   isSubmitting,
   serverError
 } : RegisterPropsType) {
-  const [showPassword, setShowPassword] = useState(false)
-
 
   return (
     <div  className={cn("flex flex-col gap-6")}>
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-xl"> <span className="underline underline-offset-2">Register </span> an account</CardTitle>
+          <CardTitle className="text-xl"> <span className="underline underline-offset-2">Register</span> an account</CardTitle>
           <CardDescription>
-          Enter your username and password below to create to your account
+            Enter your username and password below to create to your account
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -58,18 +55,10 @@ export default function RegisterForm({
                 <Label htmlFor="password" className="text-base">Password</Label>
                 <Input 
                   id="password" 
-                  type={showPassword ? "text" : "password"} 
+                  type="password" 
                   {...register("password")} 
-                  className="py-5" />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-11 cursor-pointer"
-                >
-                  {showPassword
-                    ? <Eye/>
-                    : <EyeOff/>}
-                </button>
+                  className="py-5" 
+                />
                 {errors?.password 
                   && <p className="text-sm text-red-600">{errors?.password?.message}</p>}
               </div>
