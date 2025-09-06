@@ -1,10 +1,10 @@
-import RegisterForm from "./components/auth/register-form"
+import { Outlet } from "react-router-dom"
 
 function App() {
 
   return (
     <div>
-      <RegisterForm/>
+      <Outlet/>
     </div>
   )
 }
