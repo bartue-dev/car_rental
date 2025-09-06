@@ -33,6 +33,11 @@ export  function AuthProvider({children} : AuthProviderProps) {
       setAuthLoading(false)
     }
   }, [])
+
+  // useEffect(() => {
+  //   console.log("AUTH", auth)
+  //   console.log("USER", user)
+  // }, [auth, user])
   
   return (
     <AuthContext.Provider value={{auth, setAuth, user, setUser, authLoading}}>
