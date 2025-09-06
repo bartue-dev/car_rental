@@ -1,0 +1,135 @@
+import LoginForm from "@/components/auth/login-form";
+import { z } from "zod"
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "@/api/axios";
+import { useState, useEffect, useRef } from "react";
+import useAuth from "@/hooks/use-auth";
+
+//LoginSchema validation
+const LoginSchema = z.object({
+  username: z.string().min(2, "Username must be atleast 2 characters or more"),
+  password: z.string()
+});
+
+type LoginData = z.infer<typeof LoginSchema>;
+
+export default function Login() {
+  const [serverError, setServerError] = useState<{error?: string}>({});
+  const { setAuth, setUser } = useAuth();
+  const [isGuest, setIsGuest] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const formRef = useRef<HTMLFormElement | null>(null)
+
+  const {
+    register,
+    handleSubmit,
+    formState: {errors, isSubmitting},
+    reset,
+    setValue
+  } = useForm<LoginData>({
+    resolver: zodResolver(LoginSchema)
+  });
+
+  const onSubmit = async (data: LoginData) => {
+    try {
+      //clear the serverError state
+      setServerError({})
+
+      if (isGuest) {
+        setValue("username", "Guest");
+        setValue("password", "Guest123!")
+        setIsGuest(false)
+      } else if (isAdmin) {
+        setValue("username", "Admin");
+        setValue("password", "Admin12345!")
+        setIsAdmin(false)
+      }
+
+      //post api request for login enpoint using axios
+      const response = await axios.post("/v1/login",
+        {
+          username: data.username,
+          password: data.password
+        },
+        {
+          headers: {"Content-Type": "application/json"},
+          withCredentials: true
+        });
+
+        const accessToken = response?.data?.accessToken;
+        const role = response?.data?.account?.role;
+        const accountId = response?.data?.account.accountId;
+
+        setAuth({
+          username: data.username,
+          accessToken,
+          role,
+          accountId
+        });
+
+        //set the username and role in a object to the localstorage
+        //use for persistent profile status 
+        //if the page refresh the user state will get the object data from the localstorage
+        localStorage.setItem("user", JSON.stringify({
+          username: data.username,
+          role
+        }));
+
+         //initial user state
+        setUser({
+          username: data.username,
+          role
+        })
+
+        reset()
+        console.log("LOGIN:", response)
+    } catch (err) {
+      console.error(err);
+
+      /* serverErrors */
+      const error = err as {status: number,  response: {data: { message: string }}}
+      const validateServer = {} as {error:string}
+
+      if (!error?.status) {
+        //if server is not running
+        validateServer.error = "No server response"
+      } else if (error?.status === 400) {
+        //if status is equal to 400
+        validateServer.error = error?.response?.data?.message
+      } else {
+        //if none of the if statements but also failed
+        validateServer.error = "Login failed"
+      }
+
+      //if validateServer object is not empty set the serverError state
+      if (Object.keys(validateServer).length > 0) {
+        setServerError(validateServer)
+      }
+    }
+  }
+
+  //trigger the form to submit if isGuest or isAdmin is true along with the formRef
+  useEffect(() => {
+    if ((isGuest || isAdmin) && formRef.current) {
+      formRef.current.requestSubmit();
+    }
+  }, [isGuest, isAdmin])
+
+
+  return (
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        <LoginForm
+          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
+          register={register}
+          errors={errors}
+          isSubmitting={isSubmitting}
+          serverError={serverError}
+          formRef={formRef}
+        />
+      </div>
+    </div>
+  )
+}
