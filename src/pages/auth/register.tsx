@@ -6,11 +6,13 @@ import { useState } from "react";
 import { Toaster, toast } from "sonner"
 import axios from "@/api/axios";
 
+//RegisterSchema validation
 const RegisterSchema = z.object({
   username: z.string().min(2, "Username must be atleast 2 characters or more"),
   password: z.string().regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])[A-Za-z\d#?!@$%^&*-]{8,}$/, "Password must be atleast 4 characters or more and must contain number, symbols and letters")
 });
 
+//infer the RegisterSchema to be the a type for RegisterData
 type RegisterData = z.infer<typeof RegisterSchema>;
 
 //Register component page
