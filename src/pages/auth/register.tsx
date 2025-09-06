@@ -26,10 +26,13 @@ export default function Register() {
     resolver: zodResolver(RegisterSchema)
   });
 
+  //onSubmit function
   const onSubmit = async (data: RegisterData) => {
     try {
       
-      const response = await axios.post("/v1/register", {
+      //post api request using axios 
+      //note: axios is for public api request
+      await axios.post("/v1/register", {
         username: data.username,
         password: data.password
       }, {
@@ -37,9 +40,11 @@ export default function Register() {
         withCredentials: true
       });
 
+      //clear the serverError state
       setServerError({})
 
-      console.log("REGISTER:", response)
+      //toast is a like a pop up notification
+      //along with Toaster render the message 
       toast.success("Account register successfully")
       reset();
     } catch (err) {
@@ -50,16 +55,21 @@ export default function Register() {
       const validateServer = {} as {error:string}
 
       if (!error?.status) {
+        //if server is not running
         validateServer.error = "No server response"
       } else if (error?.response?.data?.message.split(":")[0] === "P2002") {
+        //if username is already exist
         validateServer.error = "Username already exist"
         console.log("DUPLICATE")
       } else if (error?.status === 400) {
+        //if status is equal to 400
         validateServer.error = "Failed to create an account"
       } else {
+        //if none of the if statements but also failed
         validateServer.error = "Failed"
       }
 
+      //if validateServer object is not empty set the serverError state
       if (Object.keys(validateServer).length > 0) {
         setServerError(validateServer)
       }
