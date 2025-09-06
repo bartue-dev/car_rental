@@ -1,10 +1,11 @@
+import RegisterForm from "./components/auth/register-form"
 
 function App() {
 
   return (
-    <>
-     <h1>HELLO!</h1>
-    </>
+    <div>
+      <RegisterForm/>
+    </div>
   )
 }
 
