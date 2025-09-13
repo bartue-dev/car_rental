@@ -1,8 +1,9 @@
 import axios from "@/api/axios";
-import useAuth from "./use-auth";
+import { useAppDispatch } from "@/feature/hooks";
+import { setAuth } from "@/feature/auth/auth-slice";
 
 export default function useRefreshToken() {
-  const { setAuth } = useAuth();
+  const dispatch = useAppDispatch();
   
 
   const refresh = async () => {
@@ -11,13 +12,10 @@ export default function useRefreshToken() {
 
       //save overwrite the existing accessToken with the new accessToken from refreshToken api
       //as well as the role for persistent login component
-      setAuth(prev => {
-        return {
-          ...prev,
-          accessToken: response.data.accessToken,
-          role: response.data.role
-        }
-      });
+      dispatch(setAuth({
+        accessToken: response?.data?.accessToken,
+        role: response?.data?.role
+      }));
       
        //return the new accessToken from refreshToken api
       return response.data.accessToken
