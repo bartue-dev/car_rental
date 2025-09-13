@@ -3,8 +3,11 @@ import { z } from "zod"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "@/api/axios";
-import { useState, useEffect, useRef } from "react";
-import useAuth from "@/hooks/use-auth";
+import { useState, /* useEffect, */ useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/feature/hooks";
+import { setAuth } from "@/feature/auth/auth-slice";
+import { setUser } from "@/feature/user/user-slice";
 
 //LoginSchema validation
 const LoginSchema = z.object({
@@ -16,17 +19,18 @@ type LoginData = z.infer<typeof LoginSchema>;
 
 export default function Login() {
   const [serverError, setServerError] = useState<{error?: string}>({});
-  const { setAuth, setUser } = useAuth();
-  const [isGuest, setIsGuest] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  /* const [isGuest, setIsGuest] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); */
   const formRef = useRef<HTMLFormElement | null>(null)
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const {
     register,
     handleSubmit,
     formState: {errors, isSubmitting},
     reset,
-    setValue
+    // setValue
   } = useForm<LoginData>({
     resolver: zodResolver(LoginSchema)
   });
@@ -36,15 +40,15 @@ export default function Login() {
       //clear the serverError state
       setServerError({})
 
-      if (isGuest) {
-        setValue("username", "Guest");
-        setValue("password", "Guest123!")
-        setIsGuest(false)
-      } else if (isAdmin) {
-        setValue("username", "Admin");
-        setValue("password", "Admin12345!")
-        setIsAdmin(false)
-      }
+      // if (isGuest) {
+      //   setValue("username", "Guest");
+      //   setValue("password", "Guest123!")
+      //   setIsGuest(false)
+      // } else if (isAdmin) {
+      //   setValue("username", "Admin");
+      //   setValue("password", "Admin12345!")
+      //   setIsAdmin(false)
+      // }
 
       //post api request for login enpoint using axios
       const response = await axios.post("/v1/login",
@@ -61,26 +65,26 @@ export default function Login() {
         const role = response?.data?.account?.role;
         const accountId = response?.data?.account.accountId;
 
-        setAuth({
+        //save the user data to auth slice
+        dispatch(setAuth({
           username: data.username,
           accessToken,
           role,
           accountId
-        });
-
-        //set the username and role in a object to the localstorage
-        //use for persistent profile status 
-        //if the page refresh the user state will get the object data from the localstorage
-        localStorage.setItem("user", JSON.stringify({
-          username: data.username,
-          role
         }));
 
-         //initial user state
-        setUser({
+        //save username and role for user data persistent
+        dispatch(setUser({
           username: data.username,
           role
-        })
+        }))
+
+        //navigate depends of the role after successful login
+        if (role === "ADMIN") {
+          navigate("/dashboard")
+        } else if (role === "USER") {
+          navigate("/home")
+        }
 
         reset()
         console.log("LOGIN:", response)
@@ -110,11 +114,11 @@ export default function Login() {
   }
 
   //trigger the form to submit if isGuest or isAdmin is true along with the formRef
-  useEffect(() => {
+  /* useEffect(() => {
     if ((isGuest || isAdmin) && formRef.current) {
       formRef.current.requestSubmit();
     }
-  }, [isGuest, isAdmin])
+  }, [isGuest, isAdmin]) */
 
 
   return (
