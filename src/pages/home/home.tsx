@@ -1,32 +1,12 @@
-import { useAppSelector } from "@/feature/hooks"
-import { username as sliceUsername } from "@/feature/user/user-slice"
-import useLogout from "@/hooks/use-logout"
-import { useNavigate } from "react-router-dom";
+import Hero from "@/components/home/hero"
 
 export default function Home() {
-  const username = useAppSelector(sliceUsername)
-  const logout = useLogout()
-  const navigate = useNavigate()
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-
-      navigate("/login")
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
   return (
     <div>
-      <h1>{username}</h1>
-      <button
-        onClick={handleLogout}
-        className="cursor-pointer"
-      >
-        logout
-      </button>
+      <div className="flex flex-col items-center justify-center mb-10">
+        <Hero/>
+      </div>      
     </div>
   )
 }
