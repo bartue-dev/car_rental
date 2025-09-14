@@ -17,10 +17,12 @@ const persistConfig = {
   whitelist: ["user"]
 }
 
+//redux persist
 const persistedReducer = persistReducer(persistConfig, rootReducers); 
 
 export const store = configureStore({
   reducer: persistedReducer,
+  //for redux-persist
   middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware({
       serializableCheck: {
@@ -29,6 +31,7 @@ export const store = configureStore({
     }),
 });
 
+//redux persist
 export const persistor = persistStore(store)
 
 export type RootState = ReturnType<typeof rootReducers>
