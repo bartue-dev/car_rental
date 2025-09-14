@@ -33,11 +33,19 @@ const authSlice = createSlice({
       state.role = role;
       state.accountId = accountId; 
     },
+    clearAuth: (state) => {
+      state.username = null;
+      state.accessToken = null;
+      state.role = null;
+      state.accountId = null; 
+    }
   }
 });
 
-export const { setAuth } = authSlice.actions;
+export const { setAuth, clearAuth } = authSlice.actions;
 
 export default authSlice.reducer
 
 export const authAccessToken = (state: RootState) => state.auth.accessToken
+export const authRole = (state: RootState) => state.auth.role
+export const authUsername = (state: RootState) => state.auth.username
