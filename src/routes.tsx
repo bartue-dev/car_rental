@@ -16,8 +16,6 @@ export const router = createBrowserRouter([
     children: [
       // Public routes
       { path: "unauthorized", element: <Unauthorized/>},
-      { path: "register", element: <Register/> },
-      { path: "login", element: <Login/>},
       { path: "home", element: <Home/>},
 
       { element: <PersistLogin/>,
@@ -37,6 +35,8 @@ export const router = createBrowserRouter([
         ]
       }
     ]
-  }
+  },
+  { path: "register", element: <Register/> },
+  { path: "login", element: <Login/>},
 ])
 
