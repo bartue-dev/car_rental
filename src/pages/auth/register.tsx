@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react";
 import { Toaster, toast } from "sonner"
+import { useMutation } from "@tanstack/react-query";
+import type { ApiError } from "@/lib/types";
 import axios from "@/api/axios";
 
 //RegisterSchema validation
@@ -28,20 +30,20 @@ export default function Register() {
     resolver: zodResolver(RegisterSchema)
   });
 
-  //onSubmit function
-  const onSubmit = async (data: RegisterData) => {
-    try {
-      
-      //post api request using axios 
+  //tanstack react query, useMutation method
+  const {mutate: registerUser} = useMutation({
+    mutationFn: async (data: RegisterData) => {
+       //post api request using axios 
       //note: axios is for public api request
-      await axios.post("/v1/register", {
+      return await axios.post("/v1/register", {
         username: data.username,
         password: data.password
       }, {
         headers: {"Content-Type": "application/json"},
         withCredentials: true
       });
-
+    },
+    onSuccess: () => {
       //clear the serverError state
       setServerError({})
 
@@ -49,11 +51,11 @@ export default function Register() {
       //along with Toaster render the message 
       toast.success("Account register successfully")
       reset();
-    } catch (err) {
-      console.error(err);
+    },
+    onError: (error : ApiError) => {
+      console.error(error);
 
       /* Server errors */
-      const error = err as {status: number, response: { data: { message: string }}}
       const validateServer = {} as {error:string}
 
       if (!error?.status) {
@@ -62,7 +64,6 @@ export default function Register() {
       } else if (error?.response?.data?.message.split(":")[0] === "P2002") {
         //if username is already exist
         validateServer.error = "Username already exist"
-        console.log("DUPLICATE")
       } else if (error?.status === 400) {
         //if status is equal to 400
         validateServer.error = "Failed to create an account"
@@ -76,8 +77,12 @@ export default function Register() {
         setServerError(validateServer)
       }
     }
-  }
+  })
 
+  //onSubmit function
+  const onSubmit = (data: RegisterData) => {
+    registerUser(data)
+  }
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
