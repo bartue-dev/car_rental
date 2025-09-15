@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/feature/hooks";
 import { setAuth } from "@/feature/auth/auth-slice";
 import { setUser } from "@/feature/user/user-slice";
+import { useMutation } from "@tanstack/react-query";
+import type { ApiError } from "@/lib/types";
 
 //LoginSchema validation
 const LoginSchema = z.object({
@@ -17,6 +19,7 @@ const LoginSchema = z.object({
 
 type LoginData = z.infer<typeof LoginSchema>;
 
+//Login component
 export default function Login() {
   const [serverError, setServerError] = useState<{error?: string}>({});
   /* const [isGuest, setIsGuest] = useState(false);
@@ -35,8 +38,9 @@ export default function Login() {
     resolver: zodResolver(LoginSchema)
   });
 
-  const onSubmit = async (data: LoginData) => {
-    try {
+  //tanstack react query, useMutation method
+  const {mutate: loginUser} = useMutation({
+    mutationFn: async (data: LoginData) => {
       //clear the serverError state
       setServerError({})
 
@@ -61,7 +65,10 @@ export default function Login() {
           withCredentials: true
         });
 
-        const accessToken = response?.data?.accessToken;
+        return response;
+    },
+    onSuccess: (response, data) => {
+      const accessToken = response?.data?.accessToken;
         const role = response?.data?.account?.role;
         const accountId = response?.data?.account.accountId;
 
@@ -86,13 +93,12 @@ export default function Login() {
           navigate("/home")
         }
 
-        reset()
-        console.log("LOGIN:", response)
-    } catch (err) {
-      console.error(err);
+        reset();      
+    },
+    onError: (error : ApiError) => {
+      console.error(error);
 
       /* serverErrors */
-      const error = err as {status: number,  response: {data: { message: string }}}
       const validateServer = {} as {error:string}
 
       if (!error?.status) {
@@ -111,6 +117,10 @@ export default function Login() {
         setServerError(validateServer)
       }
     }
+  })
+
+  const onSubmit = (data: LoginData) => {
+    loginUser(data)
   }
 
   //trigger the form to submit if isGuest or isAdmin is true along with the formRef
