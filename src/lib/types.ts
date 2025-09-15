@@ -36,12 +36,21 @@ export type AuthContextType = {
 type RegisterData = {username: string, password: string}
 
 export type RegisterPropsType = {
-  onSubmit: (data : RegisterData) => Promise<void>,
+  onSubmit: (data : RegisterData) => void,
   handleSubmit: UseFormHandleSubmit<RegisterData>,
   register: UseFormRegister<RegisterData>,
   errors: FieldErrors<RegisterData>
   isSubmitting: boolean,
   serverError: {error?: string}
+}
+
+export type ApiError = {
+  status: number,
+  response: {
+    data: {
+      message: string
+    }
+  }
 }
 /* --------- */
 
@@ -49,7 +58,7 @@ export type RegisterPropsType = {
 type LoginData = {username: string, password: string}
 
 export type LoginPropsType = {
-  onSubmit: (data: LoginData) => Promise<void>,
+  onSubmit: (data: LoginData) => void,
   handleSubmit: UseFormHandleSubmit<LoginData>,
   register: UseFormRegister<LoginData>,
   errors: FieldErrors<LoginData>,
@@ -58,4 +67,33 @@ export type LoginPropsType = {
   formRef: RefObject<HTMLFormElement | null>
 }
 /* -------- */
+
+/* vehicles types */
+export type VehiclesStateTypes = {
+    vehicleId: string | null,
+    name: string | null,
+    status: string | null,
+    price: string | null,
+    images: {
+      url: string
+    }[]
+}
+/* -------- */
+
+/* vehicle-pagination props types */
+export type VehiclePaginationPropsTypes = {
+  currentPage: number,
+  totalPage: number,
+  itemsRender: (page: number) => void
+}
+/* -------- */
+
+/* home-testimonials props types */
+export type SelectedTestimonialsTypes = {
+  testimonial: {
+    content: string | undefined,
+    user: { username: string | undefined},
+  }
+}
+/* --------- */
 
