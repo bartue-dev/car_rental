@@ -8,6 +8,8 @@ import type { SelectedTestimonialsTypes } from "@/lib/types";
 function HomeTestimonials() {
   const [slideIndex, setSlideIndex] = useState(1)
 
+
+  //react-query, useQuery method
   const {data: selectedTestimonials = [], isLoading} = useQuery({
     queryKey: ["selectedTestimonials"],
     queryFn: async () : Promise<SelectedTestimonialsTypes[]> => {
@@ -20,9 +22,7 @@ function HomeTestimonials() {
     }
   });
 
-  console.log("SELECTED TESTIMONIALS", selectedTestimonials)
-
-  //next btn
+  //next btn fn
   const handleNextbtn = () => {
     setSlideIndex(prev => {
       if (prev >= selectedTestimonials.length) {
@@ -33,7 +33,7 @@ function HomeTestimonials() {
 
   }
 
-  //prev btn
+  //prev btn fn
   const handlePrevbtn = () => {
     setSlideIndex(prev => {
       if (prev <= 1) {
@@ -46,7 +46,7 @@ function HomeTestimonials() {
   }
 
   return (
-    <div className="bg-gray-100 p-10 font-poppins relative">
+    <div className="bg-gray-100 h-[300px] p-10 font-poppins relative">
         {isLoading
           ? <p className="text-xs italic"> Retreiving Customer Testimonials. Please Wait...</p>
           : <div className="place-self-center w-3/4 flex flex-col justify-center items-center gap-5">
