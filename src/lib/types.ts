@@ -69,14 +69,14 @@ export type LoginPropsType = {
 /* -------- */
 
 /* vehicles types */
-export type VehiclesStateTypes = {
-    vehicleId: string | null,
-    name: string | null,
-    status: string | null,
-    price: string | null,
-    images: {
-      url: string
-    }[]
+export type GetAllVehiclesTypes = {
+  vehicleId: string | null,
+  name: string | null,
+  status: string | null,
+  price: string | null,
+  images: {
+    url: string
+  }[]
 }
 /* -------- */
 
@@ -96,4 +96,3 @@ export type SelectedTestimonialsTypes = {
   }
 }
 /* --------- */
-
