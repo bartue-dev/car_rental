@@ -54,7 +54,7 @@ export default function Navbar() {
         <ul className="menu menu-horizontal px-1 text-base  gap-4">
           <li>
             <Link
-              className={`px-4 hover:bg-primary hover:text-white ${path === "home" && "font-semibold"}`}
+              className={`px-4 hover:bg-primary hover:text-white ${path === "home" && "font-bold"}`}
               to="/home"
               >
                 Home
@@ -63,7 +63,7 @@ export default function Navbar() {
           <li>
             <Link
               to="/vehicles"
-              className={`px-4 hover:bg-primary hover:text-white ${path === "vehicles" && "font-semibold"}`}
+              className={`px-4 hover:bg-primary hover:text-white ${path === "vehicles" && "font-bold"}`}
              >
               Vehicles
             </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
           <li>
             <Link 
               to="/about"
-              className={`px-4 hover:bg-primary hover:text-white ${path === "about" && "font-semibold"}`}
+              className={`px-4 hover:bg-primary hover:text-white ${path === "about" && "font-bold"}`}
             >
               About
             </Link>
