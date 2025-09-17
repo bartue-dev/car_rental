@@ -7,6 +7,9 @@ import Home from "./pages/home/home"
 import PersistLogin from "./components/common/persist-login"
 import RequiredAuth from "./components/common/required-auth"
 import Unauthorized from "./components/common/unauthorized"
+import Vehicles from "./components/home/vehicles"
+import About from "./components/home/about"
+import VehicleDetails from "./components/home/vehicle-details"
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +20,9 @@ export const router = createBrowserRouter([
       // Public routes
       { path: "unauthorized", element: <Unauthorized/>},
       { path: "home", element: <Home/>},
+      { path: "vehicles", element: <Vehicles/>},
+      { path: "about", element: <About/>},
+      { path: "vehicles/vehicle-details/:vehicleId", element: <VehicleDetails/>},
 
       { element: <PersistLogin/>,
         children: [
