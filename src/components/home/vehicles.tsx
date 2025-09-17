@@ -78,7 +78,7 @@ export default function Vehicles() {
                   {/* link to vehicleDetails */}
                   <div className="-row-span-2 flex flex-wrap items-center gap-2 md:flex-row">
                     {vehicle?.status?.toLowerCase() === "available"
-                      ? <Link to={`/vehicle-details/${vehicle.vehicleId}`}>
+                      ? <Link to={`/vehicles/vehicle-details/${vehicle.vehicleId}`}>
                           <Button className="px-10 cursor-pointer">Book</Button>
                         </Link>
                       : <Button className="px-10" disabled>Book</Button>
