@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "@/api/axios";
 import { useState, /* useEffect, */ useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/feature/hooks";
 import { setAuth } from "@/feature/auth/auth-slice";
 import { setUser } from "@/feature/user/user-slice";
@@ -26,7 +26,10 @@ export default function Login() {
   const [isAdmin, setIsAdmin] = useState(false); */
   const formRef = useRef<HTMLFormElement | null>(null)
   const navigate = useNavigate()
+  const location = useLocation()
   const dispatch = useAppDispatch()
+
+  const from = location.state?.from?.pathname || "/home"
 
   const {
     register,
@@ -90,7 +93,8 @@ export default function Login() {
         if (role === "ADMIN") {
           navigate("/dashboard")
         } else if (role === "USER") {
-          navigate("/home")
+          //navigate to the previous page if it is redirected to the log in otherwise redirect to home
+          navigate(from, {replace: true})
         }
 
         reset();      
@@ -99,7 +103,7 @@ export default function Login() {
       console.error(error);
 
       /* serverErrors */
-      const validateServer = {} as {error:string}
+      const validateServer = {} as {error:string | undefined}
 
       if (!error?.status) {
         //if server is not running
