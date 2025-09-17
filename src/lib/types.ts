@@ -1,8 +1,10 @@
+import type { BookingData } from "@/components/home/booking-form";
 import React, { type ReactNode, type RefObject } from "react";
 import type {
   UseFormRegister,
   UseFormHandleSubmit,
-  FieldErrors
+  FieldErrors,
+  UseFormSetValue
 } from "react-hook-form"
 
 /* auth-provider types */
@@ -45,12 +47,13 @@ export type RegisterPropsType = {
 }
 
 export type ApiError = {
-  status: number,
-  response: {
+  status?: number,
+  response?: {
     data: {
       message: string
     }
   }
+  name?: string
 }
 /* --------- */
 
@@ -94,5 +97,15 @@ export type SelectedTestimonialsTypes = {
     content: string | undefined,
     user: { username: string | undefined},
   }
+}
+/* --------- */
+
+/* PickupDateTime */
+export type PickupDateTimePropsTypes = {
+  pickupDate: Date,
+  setPickupDate: (pickupDate: Date) => void
+  pickupTime?: string
+  register: UseFormRegister<BookingData>
+  setValue: UseFormSetValue<BookingData>
 }
 /* --------- */
