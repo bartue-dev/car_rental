@@ -12,35 +12,10 @@ import useLogout from "@/hooks/use-logout";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ApiError } from "@/lib/types";
 import { LoaderCircle } from "lucide-react";
-
-//BookingSchema
-const BookingSchema = z.object({
-  firstName: z.string().min(1, "Firstname must not be empty"),
-  lastName: z.string().min(1, "Lastname must not be empty"),
-  address: z.string().min(1, "Address must bot be empty"),
-  phoneNumber: z.string().regex(/^(\+\d{12}|\d{11})$/, "Invalid Phone number"),
-  pickupDate: z.date("Invalid Date"),
-  pickupTime: z.string(),
-  pickupDateTime: z.string() 
-}).superRefine(({pickupDate}, ctx) => {
-  const today = new Date().setHours(0, 0, 0, 0);
-  const selectedDate = new Date(pickupDate).setHours(0, 0, 0, 0);
-
-  console.log(today)
-  console.log(selectedDate)
-  
-  if (selectedDate < today) {
-    console.log("Date must be today or later")
-    ctx.addIssue({
-      code: "custom",
-      message: "Date must be today or later",
-      path: ["pickupDate"]
-    })
-  }
-})
+import { BookingSchema } from "@/lib/zodSchema";
 
 //BookingData infer BookingSchema type
 export type BookingData = z.infer<typeof BookingSchema>
@@ -52,10 +27,7 @@ export default function BookingForm({vehicleId} : {vehicleId: string}) {
   const navigate = useNavigate();
   const location = useLocation();
   const logout = useLogout();
-
-  // useEffect(() => {
-  //   console.log(pickupDate < new Date())
-  // },[pickupDate])
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -91,10 +63,9 @@ export default function BookingForm({vehicleId} : {vehicleId: string}) {
      return response
     },
     onSuccess: (response) => {
+      queryClient.invalidateQueries({ queryKey: ["userBookings"]})
       console.log("BOOKING RESPONSE:", response)
-
       toast.success("Booking information submit successfully")
-
       reset();
     }, 
     onError: async (error : ApiError) => {
