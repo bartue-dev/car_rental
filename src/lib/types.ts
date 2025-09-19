@@ -73,11 +73,11 @@ export type LoginPropsType = {
 
 /* vehicles types */
 export type GetAllVehiclesTypes = {
-  vehicleId: string | null,
-  name: string | null,
-  status: string | null,
-  price: string | null,
-  images: {
+  vehicleId: string,
+  name?: string | null,
+  status?: string | null,
+  price?: string | null,
+  images?: {
     url: string
   }[]
 }
@@ -105,7 +105,25 @@ export type PickupDateTimePropsTypes = {
   pickupDate: Date,
   setPickupDate: (pickupDate: Date) => void
   pickupTime?: string
-  register: UseFormRegister<BookingData>
-  setValue: UseFormSetValue<BookingData>
+  register?: UseFormRegister<BookingData>
+  setValue?: UseFormSetValue<BookingData>
+}
+/* --------- */
+
+
+/* Booking form component */
+export type UserBookingsTypes = {
+  bookingId: string,
+  firstName: string,
+  lastName: string,
+  address: string,
+  phoneNumber: string,
+  pickupDateTime: string,
+  status: string,
+  vehicleId?: string,
+  vehicle: {
+    name: string,
+    price: number
+  }
 }
 /* --------- */
