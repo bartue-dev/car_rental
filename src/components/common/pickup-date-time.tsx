@@ -47,7 +47,7 @@ export default function PickupDateTime({
               onSelect={(pickupDate) => {
                 if (pickupDate) {
                   setPickupDate(pickupDate)
-                  setValue("pickupDate", pickupDate, { shouldValidate: true })
+                  setValue?.("pickupDate", pickupDate, { shouldValidate: true })
                   setOpen(false)
                 }
               }}
@@ -64,7 +64,7 @@ export default function PickupDateTime({
           id="time"
           step="1"
           defaultValue={pickupTime || "12:00:00"}
-          {...register("pickupTime")}
+          {...(register ? register("pickupTime") : {})}
           name="pickupTime"
           className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
         />
