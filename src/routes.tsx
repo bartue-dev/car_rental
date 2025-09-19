@@ -10,6 +10,8 @@ import Unauthorized from "./components/common/unauthorized"
 import Vehicles from "./components/home/vehicles"
 import About from "./components/home/about"
 import VehicleDetails from "./components/home/vehicle-details"
+import TestimonialForm from "./components/home/testimonial-form"
+import BookingsUser from "./components/home/booking-user"
 
 export const router = createBrowserRouter([
   {
@@ -18,11 +20,12 @@ export const router = createBrowserRouter([
     element: <App/>,
     children: [
       // Public routes
-      { path: "unauthorized", element: <Unauthorized/>},
+      { index: true, element: <Home/>},
       { path: "home", element: <Home/>},
       { path: "vehicles", element: <Vehicles/>},
       { path: "about", element: <About/>},
       { path: "vehicles/vehicle-details/:vehicleId", element: <VehicleDetails/>},
+      { path: "unauthorized", element: <Unauthorized/>},
 
       { element: <PersistLogin/>,
         children: [
@@ -35,7 +38,8 @@ export const router = createBrowserRouter([
             /* USER route */
           { element: <RequiredAuth allowedRole="USER"/>,
             children: [
-              // { path: "testimonials", element: <TestimonialForm/>}
+              { path: "testimonials", element: <TestimonialForm/>},
+              { path: "bookings-user", element: <BookingsUser/>}
             ]
           }
         ]
