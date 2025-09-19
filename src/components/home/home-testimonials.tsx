@@ -46,9 +46,9 @@ function HomeTestimonials() {
   }
 
   return (
-    <div className="bg-gray-100 h-[300px] p-10 font-poppins relative">
+    <div className="bg-white h-[300px] p-10 font-poppins relative">
         {isLoading
-          ? <p className="text-xs italic"> Retreiving Customer Testimonials. Please Wait...</p>
+          ? <p className="text-sm italic text-center"> Retrieving Customer Testimonials. Please Wait...</p>
           : <div className="place-self-center w-3/4 flex flex-col justify-center items-center gap-5">
               <h1 className="font-semibold " >WHAT OUR CUSTOMER SAY</h1>
               {selectedTestimonials.length > 0
