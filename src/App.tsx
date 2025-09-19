@@ -13,7 +13,7 @@ function App() {
       {user?.role !== "ADMIN"
         && <Navbar />}
 
-       <div className="py-5 bg-base-200 flex-grow">
+      <div className="bg-base-200 flex-grow">
           <Outlet />
       </div>
 
