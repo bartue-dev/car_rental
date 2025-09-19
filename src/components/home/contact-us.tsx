@@ -46,7 +46,7 @@ export default function ContactUs() {
   }
 
   return (
-    <div className="flex gap-20 items-center bg-gray-100 px-30 p-6 mt-20">
+    <div className="flex gap-20 items-center bg-white px-30 p-6 mt-20">
       <Toaster position="top-center"/>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-xl" >Contact Us</h1>
@@ -56,7 +56,7 @@ export default function ContactUs() {
               type="text"
               placeholder="Name"
               {...register("name")}
-              className="shadow-md bg-white" 
+              className="shadow-xs" 
             />
             {errors?.name && <p className="text-xs text-red-600">{errors?.name?.message}</p>}
           </div>
@@ -65,7 +65,7 @@ export default function ContactUs() {
               type="email"
               placeholder="Email Adress"
               {...register("email")}
-              className="shadow-md bg-white" 
+              className="shadow-xs" 
             />
             {errors?.email && <p className="text-xs text-red-600">{errors?.email?.message}</p>}
           </div>
@@ -73,7 +73,7 @@ export default function ContactUs() {
             <Textarea 
               placeholder="Message" 
               {...register("message")} 
-              className="shadow-md resize-none h-30 bg-white"
+              className="shadow-xs resize-none h-30"
             />
             {errors?.message && <p className="text-xs text-red-600">{errors?.message.message}</p>}
           </div>
