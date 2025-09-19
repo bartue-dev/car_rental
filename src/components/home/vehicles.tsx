@@ -34,24 +34,35 @@ export default function Vehicles() {
     });
 
     return response?.data?.data?.vehicleDetails
-
   }
 
   //page
   const page = 1
   //react-query, useQuery
-  const { data: vehicles = [], isLoading } = useQuery({
+  const { data: vehicles = [], isLoading, isError, error } = useQuery({
     queryKey: ["vehicles", page],
     queryFn: () => getAllVehicle(page)
   }) 
 
+  console.log(error)
+
+  //if fetching data failed
+  if (isError) {
+    return (
+      <div>
+        {error.message === "Network Error"
+         && <p className="text-sm italic text-center mb-5 mt-5">Check your network</p>}
+      </div>
+    )
+  }
+
   return (
     <div className="px-18 py-5">
       <h1 className="place-self-center text-4xl font-semibold ">VEHICLES</h1>
-      <div className="grid grid-cols-3 gap-8 mt-10  place-items-center px-20 mb-8">
       {isLoading
-        ? <p className="text-sm italic">Retrieving vehicles data. Please wait..</p>
-        : vehicles.map(vehicle => {
+        ? <p className="text-sm italic text-center mb-5 mt-5">Retrieving vehicles data. Please wait...</p>
+        : <div className="grid grid-cols-3 gap-8 mt-10  place-items-center px-20 mb-8">
+        { vehicles.map(vehicle => {
           return (  
                 /* card */
               <div 
@@ -89,7 +100,7 @@ export default function Vehicles() {
               </div>
           )
         })}
-      </div>
+          </div>}
       <VehiclePagination
         currentPage={pagination.currentPage}
         totalPage={pagination.totalPage}
