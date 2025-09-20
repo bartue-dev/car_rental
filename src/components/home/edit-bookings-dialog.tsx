@@ -91,11 +91,8 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
       return response
  
     },
-    onSuccess: (response) => {
-      console.log("EDIT BOOKING RESPONSE:", response)
-
+    onSuccess: () => {
       toast.success("Booking information edited successfully");
-
       reset();
     }
   })
