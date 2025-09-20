@@ -16,7 +16,7 @@ export default function ProfileStatus() {
     await logout(); 
 
     //redirect to the login page
-    navigate("/login")
+    navigate("/home")
   }
 
   return (
