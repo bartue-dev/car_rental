@@ -12,6 +12,9 @@ import About from "./components/home/about"
 import VehicleDetails from "./components/home/vehicle-details"
 import TestimonialForm from "./components/home/testimonial-form"
 import BookingsUser from "./components/home/booking-user"
+import Dashboard from "./pages/dashboard"
+import Main from "./components/dashboard/main"
+import IndexRoute from "./components/common/index-route"
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +23,7 @@ export const router = createBrowserRouter([
     element: <App/>,
     children: [
       // Public routes
-      { index: true, element: <Home/>},
+      { index: true, element: <IndexRoute/>},
       { path: "home", element: <Home/>},
       { path: "vehicles", element: <Vehicles/>},
       { path: "about", element: <About/>},
@@ -32,7 +35,12 @@ export const router = createBrowserRouter([
             /* ADMIN route */
           { element: <RequiredAuth allowedRole="ADMIN"/>,
             children: [
-              // { path: "dashboard", element: <Dashboard/>}
+              { path: "dashboard", element: <Dashboard/>,
+                children: [
+                  { index: true, element: <Main/>},
+                  { path: "main", element: <Main/>}
+                ]
+              }
             ]
           },
             /* USER route */
