@@ -49,11 +49,14 @@ export type RegisterPropsType = {
 export type ApiError = {
   status?: number,
   response?: {
-    data: {
+    status?: number,
+    data?: {
       message: string
     }
   }
   name?: string
+  code?: string,
+  message?: string,
 }
 /* --------- */
 
@@ -77,7 +80,7 @@ export type GetAllVehiclesTypes = {
   name?: string | null,
   status?: string | null,
   price?: string | null,
-  images?: {
+  images: {
     url: string
   }[]
 }
@@ -127,3 +130,23 @@ export type UserBookingsTypes = {
   }
 }
 /* --------- */
+
+/* DataSummary Component */
+export type SummaryDataTypes = {
+  vehicles: number,
+  bookings: number,
+  testimonials: number
+}
+/* ----- */
+
+
+/* RecentBookings Component */
+export type RecentBookingsTypes = {
+  bookingId: string,
+  firstName: string,
+  lastName: string,
+  address: string,
+  phoneNumber: string,
+  status: string
+}
+/* -------- */
