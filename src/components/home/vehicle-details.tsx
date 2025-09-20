@@ -17,7 +17,7 @@ export default function VehicleDetails() {
   });
 
   return (
-    <div className="flex justify-between px-18 ">
+    <div className="flex justify-between px-18 py-5">
       { isLoading
           ? <LoaderCircle className="animate-spin"/>
           : (
