@@ -62,9 +62,8 @@ export default function BookingForm({vehicleId} : {vehicleId: string}) {
 
      return response
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userBookings"]})
-      console.log("BOOKING RESPONSE:", response)
       toast.success("Booking information submit successfully")
       reset();
     }, 
