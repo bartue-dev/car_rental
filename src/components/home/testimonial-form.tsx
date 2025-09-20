@@ -69,7 +69,7 @@ export default function TestimonialForm() {
 
 
   return (
-    <div className="font-poppins w-1/2 flex flex-col gap-5 place-self-center">
+    <div className="font-poppins w-1/2 flex flex-col gap-5 place-self-center py-5">
       <Toaster position="top-center"/>
       <h1 className="text-3xl font-bold">Share your feedback</h1>
       <p className="text-base">Thanks for using our service! We'd love to hear your thoughts—just a quick message to let us know how we can improve and do better next time.</p>
@@ -80,7 +80,7 @@ export default function TestimonialForm() {
         <div>
           <label htmlFor="content"></label>
           <Textarea 
-            className="h-[180px]" 
+            className="h-[180px] bg-white resize-none" 
             placeholder="Your message" 
             id="content" 
             {...register("content")}
