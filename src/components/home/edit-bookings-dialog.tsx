@@ -133,6 +133,18 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
           <DialogTitle>Edit Booking Details</DialogTitle>
         </DialogHeader>
         <div className="grid grid-cols-2 gap-4">
+          {errors?.firstName 
+            && <p className="text-xs text-red-500">{errors?.firstName.message}</p>}
+          {errors?.lastName 
+            && <p className="text-xs text-red-500">{errors?.lastName.message}</p>}
+          {errors?.address 
+            && <p className="text-xs text-red-500">{errors?.address.message}</p>}
+          {errors?.phoneNumber 
+            && <p className="text-xs text-red-500">{errors?.phoneNumber.message}</p>}
+          {errors?.pickupDate 
+            && <p className="text-xs text-red-500">{errors?.pickupDate.message}</p>}
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <div className="grid gap-1">
             <Label htmlFor="firstname">Firstname</Label>
             <Input 
@@ -140,7 +152,6 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
               {...register("firstName")} 
               defaultValue={booking.firstName}
             />
-            {errors?.firstName && <p className="text-xs text-red-600">{errors.firstName?.message}</p>}
           </div>
           <div className="grid gap-1">
             <Label htmlFor="lastname">Lastname</Label>
@@ -149,7 +160,6 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
               {...register("lastName")}
               defaultValue={booking.lastName}
             />
-            {errors?.lastName && <p className="text-xs text-red-600">{errors?.lastName?.message}</p>}
           </div>
           <div className="grid gap-1">
             <Label htmlFor="address">Address</Label>
@@ -158,7 +168,6 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
               {...register("address")} 
               defaultValue={booking.address}
             />
-            {errors?.address && <p className="text-xs text-red-600">{errors?.address?.message}</p>}
           </div>
           <div className="grid gap-1">
             <Label htmlFor="phoneNumber">Phone #</Label>
@@ -167,7 +176,6 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
               {...register("phoneNumber")} 
               defaultValue={booking.phoneNumber}
             />
-            {errors?.phoneNumber && <p className="text-xs text-red-600">{errors?.phoneNumber?.message}</p>}
           </div>
           <div className="col-span-2">
             <fieldset className="border rounded-md p-3 border-gray-300 shadow-xs">
@@ -180,7 +188,6 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
                 setValue={setValue}
               />
             </fieldset>
-            {errors?.pickupDate && <p className="text-xs text-red-500">{errors?.pickupDate.message}</p>}
           </div>
           <div className="grid gap-1 col-span-2">
             <Label htmlFor="vehicle">Vehicles</Label>
