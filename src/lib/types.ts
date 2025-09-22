@@ -110,9 +110,9 @@ export type PickupDateTimePropsTypes = {
   pickupTime?: string
   register?: UseFormRegister<BookingData>
   setValue?: UseFormSetValue<BookingData>
+  
 }
 /* --------- */
-
 
 /* Booking form component */
 export type UserBookingsTypes = {
@@ -150,3 +150,46 @@ export type RecentBookingsTypes = {
   status: string
 }
 /* -------- */
+
+/* BookingTable Component, Admin */
+export type BookingsAdminTypes = {
+  bookingDetails: RecentBookingsTypes[]
+  vehicles: GetAllVehiclesTypes[]
+}
+/* --------- */
+
+/* Booking Action */
+export type BookingActionsPropsTypes = {
+  bookingId: string,
+  firstName: string,
+  lastName: string,
+  address: string,
+  phoneNumber: string,
+  status: string
+}
+/* --------- */
+
+/* EditFormDialog Admin */
+export type EditFormDialogAdminPropsTypes = {
+  bookingId: string,
+  firstName: string,
+  lastName: string,
+  address: string,
+  phoneNumber: string,
+  pickupDateTime?: string,
+  status: string,
+  vehicleId?: string,
+  vehicle?: {
+    name: string,
+    price: number
+  }
+  setIsEditDialogOpen: React.Dispatch<React.SetStateAction<boolean>>,
+}
+/* --------- */
+
+/* DeleteBookingAlert Admin */
+export type DeleteBookingAlertAdminPropsType = {
+  bookingId: string,
+  setIsDeleteDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+/* --------- */
