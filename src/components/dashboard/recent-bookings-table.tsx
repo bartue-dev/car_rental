@@ -72,8 +72,6 @@ export default function RecentBookings() {
     }
   });
 
-  console.log(recentBookings)
-
   if (isError) {
     return (
       <div>
