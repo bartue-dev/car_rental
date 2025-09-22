@@ -15,6 +15,7 @@ import BookingsUser from "./components/home/booking-user"
 import Dashboard from "./pages/dashboard"
 import Main from "./components/dashboard/main"
 import IndexRoute from "./components/common/index-route"
+import Bookings from "./components/dashboard/bookings"
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +39,8 @@ export const router = createBrowserRouter([
               { path: "dashboard", element: <Dashboard/>,
                 children: [
                   { index: true, element: <Main/>},
-                  { path: "main", element: <Main/>}
+                  { path: "main", element: <Main/>},
+                  { path: "admin/bookings", element: <Bookings/>}
                 ]
               }
             ]
