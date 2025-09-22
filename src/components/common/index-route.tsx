@@ -9,6 +9,6 @@ export default function IndexRoute() {
   return (
     user.role !== "ADMIN"
       ? <Home />
-      : <Navigate to="/dashboard" />
+      : <Navigate to="/dashboard/main" />
   )
 }
