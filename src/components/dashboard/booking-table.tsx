@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import useAxiosPrivate from "@/hooks/use-axios-private";
+import useAxiosPrivate from "@/hooks/common/use-axios-private";
 import BookingActions from "./bookings-actions";
 import { useQuery } from "@tanstack/react-query";
 import type { BookingsAdminTypes } from "@/lib/types";
