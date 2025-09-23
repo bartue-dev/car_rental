@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
-import useRefreshToken from "@/hooks/use-refresh-token";
+import useRefreshToken from "@/hooks/common/use-refresh-token";
 import { useAppSelector } from "@/feature/hooks";
 import { authAccessToken } from "@/feature/auth/auth-slice";
 import { LoaderCircle } from "lucide-react";
@@ -16,6 +16,7 @@ export default function PersistLogin() {
 
     const verifyRefreshToken = async () => {
       try {
+        // await new Promise(resolve => setTimeout(resolve, 3000));
         await refresh()
       } catch (error) {
         console.error(error)
@@ -40,9 +41,12 @@ export default function PersistLogin() {
 
 
   return (
-    <div>
+    <div className="flex items-center justify-center min-h-screen">
       {isLoading
-        ? <LoaderCircle className="animated-spin"/>
+        ? <LoaderCircle 
+            size={50}
+            className="animate-spin" 
+          />
         : <Outlet/>}
     </div>
   )
