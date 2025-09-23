@@ -25,7 +25,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import type { GetAllVehiclesTypes, UserBookingsTypes } from "@/lib/types"
-import useAxiosPrivate from "@/hooks/use-axios-private"
+import useAxiosPrivate from "@/hooks/common/use-axios-private"
 import PickupDateTime from "../common/pickup-date-time"
 import { BookingSchema } from "@/lib/zodSchema"
 import { toast } from "sonner"
@@ -230,7 +230,11 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
             disabled={isSubmitting}
           >
             Save changes
-            {isSubmitting && <LoaderCircle className="animate-spin"/>}
+            {isSubmitting 
+              && <LoaderCircle 
+                    size={50}
+                    className="animate-spin" 
+                  />}
           </Button>
         </DialogFooter>
         </form>
