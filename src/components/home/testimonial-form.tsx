@@ -1,7 +1,7 @@
-import useAxiosPrivate from "@/hooks/use-axios-private";
+import useAxiosPrivate from "@/hooks/common/use-axios-private";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Toaster, toast } from 'sonner'
-import useLogout from "@/hooks/use-logout";
+import useLogout from "@/hooks/common/use-logout";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -95,7 +95,11 @@ export default function TestimonialForm() {
           disabled={isSubmitting}
         >
           Submit
-          {isSubmitting && <LoaderCircle className="animate-spin"/>}
+          {isSubmitting 
+            && <LoaderCircle 
+                size={50}
+                className="animate-spin" 
+              />}
         </button>
       </form>
     </div>
