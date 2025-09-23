@@ -77,9 +77,10 @@ export type LoginPropsType = {
 /* vehicles types */
 export type GetAllVehiclesTypes = {
   vehicleId: string,
-  name?: string | null,
-  status?: string | null,
-  price?: string | null,
+  name?: string,
+  status?: string,
+  price?: string,
+  type?: string,
   images: {
     url: string
   }[]
@@ -170,7 +171,7 @@ export type BookingActionsPropsTypes = {
 /* --------- */
 
 /* EditFormDialog Admin */
-export type EditFormDialogAdminPropsTypes = {
+export type EditBookingsDialogAdmin = {
   bookingId: string,
   firstName: string,
   lastName: string,
@@ -192,4 +193,12 @@ export type DeleteBookingAlertAdminPropsType = {
   bookingId: string,
   setIsDeleteDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
+/* --------- */
+
+/* BookingFormAdmin component */
+export type BookingFormAdmin = {
+  vehicleId: string,
+  setVehicleId: (value: string) => void
+}
+
 /* --------- */
