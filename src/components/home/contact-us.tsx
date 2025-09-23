@@ -83,7 +83,11 @@ export default function ContactUs() {
             disabled={isSubmitting}
           >
             Submit
-            {isSubmitting && <LoaderCircle className="animated-spin"/>}
+            {isSubmitting 
+              && <LoaderCircle 
+                  size={50}
+                  className="animate-spin" 
+                />}
           </Button>
         </div>
       </form>
