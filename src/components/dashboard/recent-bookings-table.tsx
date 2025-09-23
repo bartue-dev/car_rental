@@ -8,20 +8,16 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { useNavigate } from "react-router-dom";
 import { subDays, format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
-import useLogout from "@/hooks/use-logout";
-import useAxiosPrivate from "@/hooks/use-axios-private";
-import type { ApiError, RecentBookingsTypes } from "@/lib/types";
+import useAxiosPrivate from "@/hooks/common/use-axios-private";
+import type { RecentBookingsTypes } from "@/lib/types";
 
 export default function RecentBookings() {
   // const [bookings, setBookings] = useState([]);
   // const [isLoading, setIsLoading] = useState(true);
   // const [error, setError] = useState()
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const logout = useLogout();
 
 
   const {
@@ -32,7 +28,7 @@ export default function RecentBookings() {
   } = useQuery({
     queryKey: ["recentBookings"],
     queryFn: async () : Promise<RecentBookingsTypes[]> => {
-      try {
+      // try {
         const response = await axiosPrivate.get("/v1/booking-admin")
         const weekAgo = format(subDays(new Date(), 7), "yyyy-MM-dd");
 
@@ -55,20 +51,20 @@ export default function RecentBookings() {
         // });
 
         // return data
-      } catch (err) {
-        const error = err as ApiError
-        if (error?.code === "ERR_NETWORK") {
-          throw new Error("Please check your network")
-        } else if (error?.response?.status === 400) {
-          throw new Error("Bad request")
-        } else if (error?.response?.status === 403) {
-          await logout();
-          navigate("/login")
-          throw new Error("Unauthorized")
-        } else {
-          throw new Error("An unexpected error occured")
-        }
-      }
+      // } catch (err) {
+      //   const error = err as ApiError
+      //   if (error?.code === "ERR_NETWORK") {
+      //     throw new Error("Please check your network")
+      //   } else if (error?.response?.status === 400) {
+      //     throw new Error("Bad request")
+      //   } else if (error?.response?.status === 403) {
+      //     await logout();
+      //     navigate("/login")
+      //     throw new Error("Unauthorized")
+      //   } else {
+      //     throw new Error("An unexpected error occured")
+      //   }
+      // }
     }
   });
 
