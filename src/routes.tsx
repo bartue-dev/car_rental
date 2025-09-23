@@ -12,10 +12,11 @@ import About from "./components/home/about"
 import VehicleDetails from "./components/home/vehicle-details"
 import TestimonialForm from "./components/home/testimonial-form"
 import BookingsUser from "./components/home/booking-user"
-import Dashboard from "./pages/dashboard"
+import Dashboard from "./pages/dashboard/dashboard"
 import Main from "./components/dashboard/main"
 import IndexRoute from "./components/common/index-route"
 import Bookings from "./components/dashboard/bookings"
+import AddBookingAdmin from "./components/dashboard/add-booking-admin"
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +41,11 @@ export const router = createBrowserRouter([
                 children: [
                   { index: true, element: <Main/>},
                   { path: "main", element: <Main/>},
-                  { path: "admin/bookings", element: <Bookings/>}
+                  { path: "admin/bookings", element: <Bookings/>,
+                    children: [
+                      { path: "add-booking", element: <AddBookingAdmin/>}
+                    ]
+                  }
                 ]
               }
             ]
