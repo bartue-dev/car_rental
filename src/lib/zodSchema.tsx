@@ -12,9 +12,6 @@ export const BookingSchema = z.object({
 }).superRefine(({pickupDate}, ctx) => { //custom conditional validation
   const today = new Date().setHours(0, 0, 0, 0);
   const selectedDate = new Date(pickupDate).setHours(0, 0, 0, 0);
-
-  console.log(today)
-  console.log(selectedDate)
   
   if (selectedDate < today) {
     console.log("Date must be today or later")
