@@ -6,8 +6,8 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Toaster, toast } from 'sonner'
-import useAxiosPrivate from "@/hooks/use-axios-private";
-import useLogout from "@/hooks/use-logout";
+import useAxiosPrivate from "@/hooks/common/use-axios-private";
+import useLogout from "@/hooks/common/use-logout";
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -164,7 +164,11 @@ export default function BookingForm({vehicleId} : {vehicleId: string}) {
             disabled={isSubmitting}
           >
             Submit
-            {isSubmitting && <LoaderCircle className="animate-spin"/>}
+            {isSubmitting 
+            && <LoaderCircle 
+                  size={50}
+                  className="animate-spin" 
+                />}
           </Button>
         </div>
       </form>
