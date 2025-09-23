@@ -1,5 +1,5 @@
 import { Car, ClipboardCheck, MessageCircle  } from 'lucide-react';
-import useAxiosPrivate from '@/hooks/use-axios-private';
+import useAxiosPrivate from '@/hooks/common/use-axios-private';
 import { useQuery } from '@tanstack/react-query';
 import type { SummaryDataTypes } from '@/lib/types';
 
