@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar"
 
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import useLogout from "@/hooks/use-logout"
+import useLogout from "@/hooks/common/use-logout"
 
 // Menu items.
 const items = [
