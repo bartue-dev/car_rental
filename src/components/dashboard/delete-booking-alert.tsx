@@ -10,7 +10,7 @@ import {
 
 import type { DeleteBookingAlertAdminPropsType } from "@/lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useAxiosPrivate from "@/hooks/use-axios-private";
+import useAxiosPrivate from "@/hooks/common/use-axios-private";
 
 //DeleteBookingAlert Component
 export default function DeleteBookingAlert({
