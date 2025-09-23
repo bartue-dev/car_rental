@@ -19,25 +19,26 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { format } from "date-fns";
 import { useState } from "react"
-import type{ EditFormDialogAdminPropsTypes, GetAllVehiclesTypes } from "@/lib/types"
+import type{ EditBookingsDialogAdmin } from "@/lib/types"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { BookingSchema } from "@/lib/zodSchema"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { LoaderCircle } from "lucide-react"
-import useAxiosPrivate from "@/hooks/use-axios-private"
+import useAxiosPrivate from "@/hooks/common/use-axios-private"
 import PickupDateTime from "../common/pickup-date-time"
+import useVehiclesAdmin from "@/hooks/react-query/vehicles-query-admin"
 
 //EditBookingAdminData
 type EditBookingAdminData = z.infer<typeof BookingSchema>
 
 //EditFormDialogBooking admin component
-export default function EditFormDialogBooking({
+export default function EditBookingsDialogAdmin({
   setIsEditDialogOpen,
   status : statusProp,
   ...booking
-} : EditFormDialogAdminPropsTypes) {
+} : EditBookingsDialogAdmin) {
   const [status, setStatus] = useState(statusProp || "PENDING")
   const [vehicleId, setVehicleId] = useState(booking.vehicleId)
   const [pickupDate, setPickupDate] = useState(
@@ -64,19 +65,14 @@ export default function EditFormDialogBooking({
     }
   });
 
-  //vehicles useQuery
-  const {
-    data: vehicles = [],
-    isLoading: vehiclesIsLoading,
-    isError: vehiclesIsErr,
-    error: vehiclesErr
-  } = useQuery({
-    queryKey: ["vehicles"],
-    queryFn: async () : Promise<GetAllVehiclesTypes[]> => {
-      const response = await axiosPrivate.get("/v1/vehicle-admin");
-      return response.data.data.vehicleDetails
-    }
-  });
+  //vehicles custom useQuery
+  const { 
+    vehicles,
+    vehiclesIsLoading,
+    vehiclesIsErr,
+    vehiclesErr
+  } = useVehiclesAdmin()
+  
 
   //editBookingAdmin useMutation
   const {
@@ -104,10 +100,7 @@ export default function EditFormDialogBooking({
     onSuccess: (response) => {
       console.log("Admin edit bookings", response)
       queryClient.invalidateQueries({ queryKey: ["bookings"]})
-    },
-    // onError: () => {
-
-    // }
+    }
   })
 
   /* update booking function */
@@ -119,7 +112,7 @@ export default function EditFormDialogBooking({
   if (vehiclesIsErr) {
     return (
       <div className="text-xs text-red-600 text-center">
-        {vehiclesErr.message || "An error occured!"}, at edit booking admin
+        {vehiclesErr?.message || "An error occured!"}, at edit booking admin
       </div>
     )
   }
