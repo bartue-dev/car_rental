@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import { useState } from "react"
-import EditFormDialogBooking from './edit-booking-dialog-admin';
+import EditBookingsDialogAdmin from './edit-booking-dialog-admin';
 import DeleteBookingAlert from './delete-booking-alert';
 import BookingDetails from './booking-details';
 import type { BookingActionsPropsTypes } from '@/lib/types';
@@ -71,7 +71,7 @@ export default function BookingActions({...booking} : BookingActionsPropsTypes) 
 
       {/* Edit form dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <EditFormDialogBooking
+        <EditBookingsDialogAdmin
           {...booking}
           setIsEditDialogOpen={setIsEditDialogOpen}
         />
