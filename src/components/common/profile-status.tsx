@@ -3,7 +3,7 @@ import { useAppSelector } from "@/feature/hooks";
 import { UserRound } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import useLogout from "@/hooks/use-logout";
+import useLogout from "@/hooks/common/use-logout";
 import { ChevronDown } from 'lucide-react';
 
 export default function ProfileStatus() {
