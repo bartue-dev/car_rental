@@ -11,7 +11,7 @@ import { SquareUser,
 } from 'lucide-react';
 
 import { Button } from "../ui/button";
-import useAxiosPrivate from "@/hooks/use-axios-private";
+import useAxiosPrivate from "@/hooks/common/use-axios-private";
 import EditBookingsDialog from "./edit-bookings-dialog"; 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { UserBookingsTypes } from '@/lib/types';
@@ -146,7 +146,11 @@ export default function BookingsUser() {
                       disabled={booking.status === "CONFIRM" || booking.status === "COMPLETED"}
                     >
                       Delete
-                      {isPending && <LoaderCircle className="animate-spin"/>}
+                      {isPending 
+                        && <LoaderCircle 
+                            size={50}
+                            className="animate-spin" 
+                          />}
                     </Button>
                   </div>
                 </div>
