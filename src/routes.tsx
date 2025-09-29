@@ -17,6 +17,8 @@ import Main from "./components/dashboard/main"
 import IndexRoute from "./components/common/index-route"
 import Bookings from "./components/dashboard/bookings"
 import AddBookingAdmin from "./components/dashboard/add-booking-admin"
+import AdminVehicles from "./components/dashboard/admin-vehicles"
+import AddVehicle from "./components/dashboard/add-vehicle"
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +46,11 @@ export const router = createBrowserRouter([
                   { path: "admin/bookings", element: <Bookings/>,
                     children: [
                       { path: "add-booking", element: <AddBookingAdmin/>}
+                    ]
+                  },
+                  { path: "admin/vehicles", element: <AdminVehicles/>,
+                    children: [
+                      { path: "add-vehicle", element: <AddVehicle/>}
                     ]
                   }
                 ]
