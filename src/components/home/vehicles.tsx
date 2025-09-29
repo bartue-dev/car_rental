@@ -3,7 +3,7 @@ import axios from "@/api/axios";
 import { Button } from "@/components/ui/button"
 import VehiclePagination from "./vehicle-pagination";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import type { GetAllVehiclesTypes } from "@/lib/types";
 
@@ -36,15 +36,17 @@ export default function Vehicles() {
     return response?.data?.data?.vehicleDetails
   }
 
-  //page
-  const page = 1
   //react-query, useQuery
-  const { data: vehicles = [], isLoading, isError, error } = useQuery({
-    queryKey: ["vehicles", page],
-    queryFn: () => getAllVehicle(page)
+  const { 
+    data: vehicles = [],
+    isLoading, 
+    isError, 
+    error
+  } = useQuery({
+    queryKey: ["vehicles", pagination.currentPage],
+    queryFn: () => getAllVehicle(pagination.currentPage),
+    placeholderData: keepPreviousData
   }) 
-
-  console.log(error)
 
   //if fetching data failed
   if (isError) {
