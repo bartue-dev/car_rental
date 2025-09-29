@@ -51,7 +51,10 @@ export type ApiError = {
   response?: {
     status?: number,
     data?: {
-      message: string
+      message?: string
+      errors?: {
+        error: string
+      }
     }
   }
   name?: string
