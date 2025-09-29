@@ -18,14 +18,14 @@ export default function VehiclePagination({
   //previous button function
   const handlePrev = async () => {
     if (currentPage > 1) {
-      itemsRender(currentPage - 1)
+      itemsRender(currentPage -= 1)
     }
   };
 
   //next button function
   const handleNext = async () => {
     if (currentPage < totalPage) {
-      itemsRender(currentPage + 1)
+      itemsRender(currentPage += 1)
     }
   }
 
