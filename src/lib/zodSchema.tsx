@@ -21,4 +21,40 @@ export const BookingSchema = z.object({
       path: ["pickupDate"]
     })
   }
+});
+
+//Edit Vehicle Schema
+export const EditVehicleSchema = z.object({
+  name: z.string().min(1, "Vehicle name must not be empty"),
+  type: z.string().min(1, "Vehicle type must not be empty"),
+  price: z.number("Invalid Price"),
+  status: z.string(),
+  file: z.any()
+        .optional()
+        .refine((file) => {
+      // If no file is provided, it's valid (optional)
+      if (!file || file.length === 0) return true;
+      // If file is provided, validate it
+      if (file[0]) {
+        return ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/svg"].includes(file[0].type);
+      }
+      return false;
+    }, "Invalid Image, Only jpeg, jpg, png and webp are allowed")
+})
+
+//Vehicle Schema
+export const VehicleSchema = z.object({
+  name: z.string().min(1, "Vehicle name must not be empty"),
+  type: z.string().min(1, "Vehicle type must not be empty"),
+  price: z.number("Invalid Price"),
+  status: z.string(),
+  file: z.any()
+        .refine((files) => files?.length == 1, "Image is required.")
+        .refine((file) => {
+        // If file is provided, validate it
+        if (file[0]) {
+          return ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/svg"].includes(file[0].type);
+        }
+        return false;
+      }, "Invalid Image, Only jpeg, jpg, png and webp are allowed")
 })
