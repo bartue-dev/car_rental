@@ -19,6 +19,7 @@ import Bookings from "./components/dashboard/bookings"
 import AddBookingAdmin from "./components/dashboard/add-booking-admin"
 import AdminVehicles from "./components/dashboard/admin-vehicles"
 import AddVehicle from "./components/dashboard/add-vehicle"
+import AdminTestimonialsData from "./components/dashboard/admin-testimonials"
 
 export const router = createBrowserRouter([
   {
@@ -52,7 +53,8 @@ export const router = createBrowserRouter([
                     children: [
                       { path: "add-vehicle", element: <AddVehicle/>}
                     ]
-                  }
+                  },
+                  { path: "admin/testimonials", element: <AdminTestimonialsData/>}
                 ]
               }
             ]
