@@ -90,7 +90,7 @@ export default function BookingForm({
     <div className="border py-3 rounded-md shadow-md min-w-110 bg-white">
       <Toaster position="top-center"/>
       <h1 className="place-self-center">BOOKING FORM</h1>
-      {vehicleId === null && <p className="text-center text-xs mt-4 text-red-500">Please select a vehicle to book first</p>}
+      {vehicleId === null && <p className="text-center text-xs mt-4 text-red-500">Please select a vehicle to book</p>}
       <form onSubmit={handleSubmit(onSubmit)} className="px-5 flex flex-col gap-1">
         <div className="flex flex-col gap-3">
           <Label htmlFor="firstName">Firstname:</Label>
