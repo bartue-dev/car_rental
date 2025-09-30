@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -83,7 +82,7 @@ export default function RecentBookings() {
         ? <p className="text-center italic">Retrieving recent bookings. Please wait </p>
         : <div className="max-h-[350px] overflow-auto">
           <Table>
-            <TableCaption>"List of recent bookings."</TableCaption>
+            
             <TableHeader>
               <TableRow className="bg-gray-100">
                 <TableHead>Name</TableHead>
@@ -93,7 +92,8 @@ export default function RecentBookings() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {recentBookings.map((booking) => (
+              {recentBookings.length > 0
+                ? recentBookings.map((booking) => (
               <TableRow key={booking.bookingId}>
                 <TableCell>{booking.firstName} {booking.lastName}</TableCell>
                 <TableCell>{booking.address}</TableCell>
@@ -110,7 +110,12 @@ export default function RecentBookings() {
                     </span>
                 </TableCell>
               </TableRow>
-              ))}
+                  ))
+                : <TableRow>
+                    <TableCell colSpan={4} className="text-center text-gray-500 py-4">
+                      No bookings for the past 7 days
+                    </TableCell>
+                  </TableRow>}
             </TableBody>
           </Table>
           </div>}      
