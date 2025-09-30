@@ -3,10 +3,11 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useQuery } from "@tanstack/react-query";
 import type { SelectedTestimonialsTypes } from "@/lib/types";
-// import { getRandomColor } from "../../../utils/randomColor";
+import { getRandomColor } from "@/helper/random-color";
 
 function HomeTestimonials() {
   const [slideIndex, setSlideIndex] = useState(1)
+  const [isExpanded, setIsExpanded] = useState(false)
 
 
   //react-query, useQuery method
@@ -46,23 +47,39 @@ function HomeTestimonials() {
   }
 
   return (
-    <div className="bg-white h-[300px] p-10 font-poppins relative">
+    <div className="bg-white h-[350px] p-10 font-poppins relative overflow-auto">
         {isLoading
           ? <p className="text-sm italic text-center"> Retrieving Customer Testimonials. Please Wait...</p>
-          : <div className="place-self-center w-3/4 flex flex-col justify-center items-center gap-5">
+          : <div className="place-self-center w-3/4 flex flex-col justify-center items-center gap-5 mt-2">
               <h1 className="font-semibold " >WHAT OUR CUSTOMER SAY</h1>
               {selectedTestimonials.length > 0
                 &&  <div 
                       className="text-center flex flex-col justify-between items-center gap-8"
                       >
-                      <p 
+                      <div
                         className="text-base italic"
                       >
-                        {selectedTestimonials[slideIndex - 1]?.testimonial?.content}
-                      </p>
+                          { isExpanded 
+                          || selectedTestimonials[slideIndex - 1]?.testimonial?.content.length <= 500 
+                          ? <span> 
+                              {selectedTestimonials[slideIndex - 1]?.testimonial?.content + " "}
+                            </span> 
+                          : <span>
+                              {selectedTestimonials[slideIndex - 1]?.testimonial?.content?.substring(0,500) + " "}
+                            </span> }
+                          {
+                            selectedTestimonials[slideIndex - 1]?.testimonial?.content.length >= 500 
+                            && <button
+                                  onClick={() => setIsExpanded(prev => !prev)}
+                                  className="text-gray-600 text-sm"
+                                >
+                                    {isExpanded ? " Read less" : "...Read more"}
+                                </button>  
+                          }
+                      </div>
                       <div 
                         className="rounded-full w-10 h-10 text-white flex items-center justify-center text-xl bg-gray-400"
-                        // style={{backgroundColor: getRandomColor()}}
+                        style={{backgroundColor: getRandomColor()}}
                       >
                         {selectedTestimonials[slideIndex - 1]?.testimonial?.user?.username?.charAt(0).toUpperCase()}             
                       </div>
