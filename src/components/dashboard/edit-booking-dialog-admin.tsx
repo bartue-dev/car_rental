@@ -43,7 +43,7 @@ export default function EditBookingsDialogAdmin({
   const [vehicleId, setVehicleId] = useState(booking.vehicleId)
   const [pickupDate, setPickupDate] = useState(
     booking.pickupDateTime
-      ? new Date( booking.pickupDateTime.split(", ")[0])
+      ? new Date( booking.pickupDateTime.split(" ")[0])
       : new Date()
     )
   const axiosPrivate = useAxiosPrivate();
@@ -174,7 +174,7 @@ export default function EditBookingsDialogAdmin({
               <PickupDateTime 
                 pickupDate={pickupDate} 
                 setPickupDate={setPickupDate}
-                pickupTime={booking?.pickupDateTime?.split(", ")[1]}
+                pickupTime={booking?.pickupDateTime?.split(" ")[1]}
                 register={register}
                 setValue={setValue}
               />
