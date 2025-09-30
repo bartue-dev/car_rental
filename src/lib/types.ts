@@ -101,8 +101,8 @@ export type VehiclePaginationPropsTypes = {
 /* home-testimonials props types */
 export type SelectedTestimonialsTypes = {
   testimonial: {
-    content: string | undefined,
-    user: { username: string | undefined},
+    content: string,
+    user: { username: string},
   }
 }
 /* --------- */
@@ -200,8 +200,19 @@ export type DeleteBookingAlertAdminPropsType = {
 
 /* BookingFormAdmin component */
 export type BookingFormAdmin = {
-  vehicleId: string,
+  vehicleId: string | null,
   setVehicleId: (value: string) => void
 }
+/* --------- */
 
+/* AdminTestimonials */
+export type TestimonialsAdmin = {
+  testimonialId: string,
+  content: string,
+  isSelected: string,
+  user: {
+    username: string,
+    
+  }
+}
 /* --------- */
