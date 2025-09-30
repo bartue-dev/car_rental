@@ -20,16 +20,16 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { format } from "date-fns";
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import type { GetAllVehiclesTypes, UserBookingsTypes } from "@/lib/types"
-import useAxiosPrivate from "@/hooks/common/use-axios-private"
-import PickupDateTime from "../common/pickup-date-time"
 import { BookingSchema } from "@/lib/zodSchema"
 import { toast } from "sonner"
 import { LoaderCircle } from "lucide-react"
+import useAxiosPrivate from "@/hooks/common/use-axios-private"
+import PickupDateTime from "../common/pickup-date-time"
 
 //EditBookingData infer BookingSchema type
 type EditBookingData = z.infer<typeof BookingSchema>
@@ -40,6 +40,7 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
   const [vehicleId, setVehicleId] = useState(booking.vehicleId);
   const [pickupDate, setPickupDate] = useState(new Date(booking.pickupDateTime.split(", ")[0]))
   const axiosPrivate = useAxiosPrivate();
+  const queryClient = useQueryClient()
 
   //vehicles useQuery
   const {
@@ -94,6 +95,7 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
     onSuccess: () => {
       toast.success("Booking information edited successfully");
       reset();
+      queryClient.invalidateQueries({queryKey: ["userBookings"]})
     }
   })
 
@@ -183,7 +185,7 @@ export default function EditBookingsDialog({...booking} : UserBookingsTypes) {
               <PickupDateTime 
                 pickupDate={pickupDate} 
                 setPickupDate={setPickupDate}
-                pickupTime={booking.pickupDateTime.split(", ")[1]}
+                pickupTime={booking.pickupDateTime.split(" ")[1]}
                 register={register}
                 setValue={setValue}
               />
