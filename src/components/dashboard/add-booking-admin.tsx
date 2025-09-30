@@ -7,7 +7,7 @@ import { Toaster, toast } from "sonner";
 
 
 export default function AddBookingAdmin() {
-  const [vehicleId, setVehicleId] = useState("");
+  const [vehicleId, setVehicleId] = useState<string | null>(null);
   const navigate = useNavigate();
 
   //vehicles admin useQuery
@@ -66,14 +66,14 @@ export default function AddBookingAdmin() {
                           Name: {" "}
                           <span>
                             {vehicle?.name && vehicle?.name?.charAt(0).toUpperCase() 
-                            + vehicle?.name && vehicle?.name?.slice(1)}
+                            + vehicle?.name?.slice(1)}
                           </span>
                         </h1>
                         <h1 className="text-sm">
                           Type: {" "}
                           <span>
                             {vehicle?.type && vehicle?.type?.charAt(0).toUpperCase() 
-                            + vehicle?.type && vehicle?.type?.slice(1)}
+                            + vehicle?.type?.slice(1)}
                           </span>
                         </h1>
                         <h1 className="text-sm">
