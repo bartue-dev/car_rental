@@ -21,7 +21,7 @@ export default function Hero() {
 
         <img src="car1.png" alt="car" className="transform -scale-x-100 absolute w-200 -right-60"/>
       </div>
-      <div className="flex justify-between px-5 py-3 border shadow-md w-[90%] rounded-md mt-10 bg-contain">
+      <div className="flex justify-between px-5 py-3 border shadow-sm w-[90%] rounded-md mt-10 bg-contain bg-white">
         <img src="logoipsum-213.png" alt="logoupsum" className="w-40 h-12 object-contain" />
         <img src="logoipsum-216.png" alt="logoupsum" className="w-40 h-12 object-contain" />
         <img src="logoipsum-217.png" alt="logoupsum" className="w-40 h-12 object-contain" />
