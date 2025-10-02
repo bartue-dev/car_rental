@@ -53,7 +53,7 @@ export default function VehiclesData() {
     <div>
       {vehiclesIsLoading
         ? <p className="italic text-center">Retrieving vehicles data. Please wait!</p>
-        : <div className="grid grid-cols-2 gap-4">
+        : <div className="grid lg:grid-cols-2 gap-4">
           {vehicles?.map((vehicle) => (
             <div key={vehicle.vehicleId} className="flex items-center bg-white">
               <div className="border rounded-sm rounded-r-none p-4 bg-base-300 w-65 h-40">

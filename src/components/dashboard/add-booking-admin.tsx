@@ -1,6 +1,6 @@
 import BookingForm from "./booking-form-admin";
 import useVehiclesAdmin from "@/hooks/react-query/vehicles-query-admin";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftToLine, CircleCheck } from 'lucide-react';
 import { Toaster, toast } from "sonner";
@@ -18,11 +18,6 @@ export default function AddBookingAdmin() {
     vehiclesErr
   } = useVehiclesAdmin();
 
-  useEffect(() => {
-    console.log("VEHICLEID:", vehicleId)
-  }, [vehicleId])
-
-
   //if vehicles useQuery failed
   if (vehiclesIsErr) {
     return (
@@ -33,11 +28,11 @@ export default function AddBookingAdmin() {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 relative">
+    <div className="lg:grid grid-cols-2 gap-4 relative">
       <Toaster position="top-center"/>
       <ArrowLeftToLine 
         color="#4b5563" 
-        className="col-span-2 cursor-pointer"
+        className="col-span-2 cursor-pointer mb-3 lg:mb-0"
         onClick={() => navigate("/dashboard/admin/bookings")}
       />
       {vehiclesIsLoading
@@ -46,7 +41,7 @@ export default function AddBookingAdmin() {
             className="flex flex-col gap-4 h-137 overflow-auto border p-2 rounded-md bg-white" style={{ scrollbarColor: "light-gray relative", scrollbarWidth: "thin"}}
           >
             <h1 
-              className="absolute top-5 left-34 text-sm italic font-semibold"
+              className="absolute -top-0 lg:top-5 left-50 lg:left-34 text-sm italic font-semibold"
             >
               Please select one vehicle only 
               </h1>

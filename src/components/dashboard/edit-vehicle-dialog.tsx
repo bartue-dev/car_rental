@@ -114,7 +114,7 @@ export default function EditVehicleDialog({...vehicle}) {
             Update
           </div>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] h-127 lg:h-auto overflow-auto">
           <div className="grid grid-cols-2 gap-5">
             {errors?.name && <p className="text-xs text-red-600">{errors?.name?.message}</p>}
             {errors?.type && <p className="text-xs text-red-600">{errors?.type?.message}</p>}

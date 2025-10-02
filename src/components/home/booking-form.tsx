@@ -81,10 +81,13 @@ export default function BookingForm({vehicleId} : {vehicleId: string}) {
   }
 
   return (
-    <div className="border py-3 rounded-md shadow-md bg-white">
+    <div className="border w-full lg:w-1/2 py-3 rounded-md shadow-md bg-white">
       <Toaster position="top-center"/>
       <h1 className="place-self-center mb-2">BOOKING FORM</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="px-5 flex flex-col gap-3">
+      <form 
+        onSubmit={handleSubmit(onSubmit)} 
+        className="px-5 flex flex-col gap-3"
+      >
         <div className="flex flex-col">
           <Label 
             htmlFor="firstName"

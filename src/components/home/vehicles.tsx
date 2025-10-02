@@ -63,45 +63,49 @@ export default function Vehicles() {
       <h1 className="place-self-center text-4xl font-semibold ">VEHICLES</h1>
       {isLoading
         ? <p className="text-sm italic text-center mb-5 mt-5">Retrieving vehicles data. Please wait...</p>
-        : <div className="grid grid-cols-3 gap-8 mt-10  place-items-center px-20 mb-8">
-        { vehicles.map(vehicle => {
-          return (  
-                /* card */
-              <div 
-                key={vehicle.vehicleId} 
-                className="rounded-xl shadow-sm w-70 h-90 p-3 flex flex-col justify-between bg-base-100"
-              >
-                <div className="border rounded-sm bg-base-300 w-65 h-40 place-self-center">
-                  <img src={vehicle?.images[0]?.url} alt="car" className="w-full h-full object-contain" />
-                </div>
-                <h1 className="text-2xl break-words overflow-wrap-anywhere">
-                  {vehicle.name}
-                </h1>
-                <h1 
-                className={`text-xs border-1 border-slate-400 rounded-xl w-fit px-3 py-1 flex justify-center items-center ${vehicle?.status === "Available" ? "bg-slate-200" : "bg-red-500 text-white border-none"}`}
-                >
-                  {vehicle.status}  
-                </h1>
-                {/* pricing */}
-                <div className="flex justify-between ">
-                  <div>
-                    <h1 className="text-sm underline">Price</h1>
-                    <h1 className="">Php {vehicle?.price?.toLocaleString()}</h1>
+        : <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 mt-10 place-items-center xl:px-20 mb-8">
+            { vehicles.map(vehicle => {
+              return (  
+                    /* card */
+                  <div 
+                    key={vehicle.vehicleId} 
+                    className="rounded-xl shadow-sm w-62 md:w-70 h-90 p-3 flex flex-col justify-between bg-base-100"
+                  >
+                    <div className="border rounded-sm bg-base-300 w-full h-40 place-self-center">
+                      <img 
+                        src={vehicle?.images[0]?.url} 
+                        alt="car" 
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <h1 className="text-2xl break-words overflow-wrap-anywhere">
+                      {vehicle.name}
+                    </h1>
+                    <h1 
+                    className={`text-xs border-1 border-slate-400 rounded-xl w-fit px-3 py-1 flex justify-center items-center ${vehicle?.status === "Available" ? "bg-slate-200" : "bg-red-500 text-white border-none"}`}
+                    >
+                      {vehicle.status}  
+                    </h1>
+                    {/* pricing */}
+                    <div className="flex justify-between ">
+                      <div>
+                        <h1 className="text-sm underline">Price</h1>
+                        <h1 className="">Php {vehicle?.price?.toLocaleString()}</h1>
+                      </div>
+                      {/* link to vehicleDetails */}
+                      <div className="-row-span-2 flex flex-wrap items-center gap-2 md:flex-row">
+                        {vehicle?.status?.toLowerCase() === "available"
+                          ? <Link to={`/vehicles/vehicle-details/${vehicle.vehicleId}`}>
+                              <Button className="px-10 cursor-pointer">Book</Button>
+                            </Link>
+                          : <Button className="px-10" disabled>Book</Button>
+                        }
+                        
+                      </div>
+                    </div>
                   </div>
-                  {/* link to vehicleDetails */}
-                  <div className="-row-span-2 flex flex-wrap items-center gap-2 md:flex-row">
-                    {vehicle?.status?.toLowerCase() === "available"
-                      ? <Link to={`/vehicles/vehicle-details/${vehicle.vehicleId}`}>
-                          <Button className="px-10 cursor-pointer">Book</Button>
-                        </Link>
-                      : <Button className="px-10" disabled>Book</Button>
-                    }
-                    
-                  </div>
-                </div>
-              </div>
-          )
-        })}
+              )
+            })}
           </div>}
       <VehiclePagination
         currentPage={pagination.currentPage}

@@ -61,7 +61,7 @@ export default function BookingForm({
 
       toast.success("Booking information submit successfully")
 
-      setVehicleId("")
+      setVehicleId(null)
       reset();
 
       return response
@@ -91,7 +91,7 @@ export default function BookingForm({
       <Toaster position="top-center"/>
       <h1 className="place-self-center">BOOKING FORM</h1>
       {vehicleId === null && <p className="text-center text-xs mt-4 text-red-500">Please select a vehicle to book</p>}
-      <form onSubmit={handleSubmit(onSubmit)} className="px-5 flex flex-col gap-1">
+      <form onSubmit={handleSubmit(onSubmit)} className="px-5 flex flex-col gap-3">
         <div className="flex flex-col gap-3">
           <Label htmlFor="firstName">Firstname:</Label>
           <Input 

@@ -51,13 +51,13 @@ function HomeTestimonials() {
         {isLoading
           ? <p className="text-sm italic text-center"> Retrieving Customer Testimonials. Please Wait...</p>
           : <div className="place-self-center w-3/4 flex flex-col justify-center items-center gap-5 mt-2">
-              <h1 className="font-semibold " >WHAT OUR CUSTOMER SAY</h1>
+              <h1 className="font-semibold" >WHAT OUR CUSTOMER SAY</h1>
               {selectedTestimonials.length > 0
                 &&  <div 
                       className="text-center flex flex-col justify-between items-center gap-8"
                       >
                       <div
-                        className="text-base italic"
+                        className="text-sm md:text-base italic "
                       >
                           { isExpanded 
                           || selectedTestimonials[slideIndex - 1]?.testimonial?.content.length <= 500 
@@ -71,7 +71,7 @@ function HomeTestimonials() {
                             selectedTestimonials[slideIndex - 1]?.testimonial?.content.length >= 500 
                             && <button
                                   onClick={() => setIsExpanded(prev => !prev)}
-                                  className="text-gray-600 text-sm"
+                                  className="text-gray-600 text-xs md:text-sm"
                                 >
                                     {isExpanded ? " Read less" : "...Read more"}
                                 </button>  

@@ -19,32 +19,41 @@ export default function QuickActions() {
   return (
     <div className="mt-10">
       <h1 className="text-sm ml-1">Quick Actions</h1>
-      <div className="flex justify-between items-center gap-5 mt-2">
+      <div className="flex justify-between items-center gap-5 mt-2 ">
         <div 
-          className="border rounded-sm w-full h-20 p-5 flex items-center gap-5 shadow-xs cursor-pointer bg-white"
+          className="border rounded-sm h-20 p-5 flex items-center gap-5 shadow-xs cursor-pointer bg-white w-full"
           onClick={toBookings}
         >
-          <ClipboardPlus size={35} strokeWidth={1}/>
+          <ClipboardPlus  
+            strokeWidth={1}
+            className="border w-7 h-7 md:w-10 md:10"
+          />
           <div>
-            <h1 className="text-sm">Add Bookings</h1>
+            <h1 className="text-xs lg:text-sm">Add Bookings</h1>
           </div>
         </div>
         <div 
-          className="border rounded-sm w-full h-20 p-5 flex items-center gap-5 shadow-xs cursor-pointer bg-white"
+          className="border rounded-sm  h-20 p-5 flex items-center gap-5 shadow-xs cursor-pointer bg-white w-full"
           onClick={toVehicles}
         >
-          <ClipboardPlus size={35} strokeWidth={1}/>
+          <ClipboardPlus  
+            strokeWidth={1}
+            className="border w-7 h-7 md:w-10 md:10"
+          />
           <div>
-            <h1 className="text-sm">Add Vehicle</h1>
+            <h1 className="text-xs lg:text-sm">Add Vehicle</h1>
           </div>
         </div>
         <div 
-          className="border rounded-sm w-full h-20 p-5 flex items-center gap-5 shadow-xs cursor-pointer bg-white"
+          className="border rounded-sm  h-20 p-5 flex items-center gap-5 shadow-xs cursor-pointer bg-white w-full"
           onClick={toTestimonials}
         >
-          <MessageCircle size={30} strokeWidth={1}/>
+          <MessageCircle 
+            strokeWidth={1}
+            className="border w-7 h-7 md:w-10 md:10"
+            />
           <div>
-            <h1 className="text-sm">Review testimonials</h1>
+            <h1 className="text-xs lg:text-sm">Review testimonials</h1>
           </div>
         </div>
       </div>

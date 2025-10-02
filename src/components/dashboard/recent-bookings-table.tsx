@@ -76,13 +76,12 @@ export default function RecentBookings() {
   }
 
   return (
-    <div className="border rounded-md shadow-sm mt-10 max-w-300 bg-white">
-      <h1 className="p-3 font-semibold tracking-wide border-b-1">Recent Bookings</h1>
+    <div className="border rounded-md shadow-sm mt-10 max-w-150 lg:max-w-300 bg-white">
+      <h1 className="p-3 font-semibold tracking-wide border-b-1 text-sm lg:text-base">Recent Bookings</h1>
       {isLoading
         ? <p className="text-center italic">Retrieving recent bookings. Please wait </p>
         : <div className="max-h-[350px] overflow-auto">
-          <Table>
-            
+          <Table className="text-xs lg:text-base">
             <TableHeader>
               <TableRow className="bg-gray-100">
                 <TableHead>Name</TableHead>

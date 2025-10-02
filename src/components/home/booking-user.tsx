@@ -68,44 +68,49 @@ export default function BookingsUser() {
   }
 
   return (
-    <div className="p-3">
+    <div className="p-5">
       <Toaster position="top-center"/>
       {isLoading
-        ? <p className="text-sm italic">Retrieving Bookings. Please wait...</p>
-        : <div>
+        ? <p className="text-sm italic text-center">Retrieving Bookings. Please wait...</p>
+        : <div className="px-10">
             <h1 className="text-center mb-6 font-semibold text-2xl">My Bookings</h1>
-            <div className="grid grid-cols-2 justify-items-center gap-8 w-310 place-self-center">
+            <div 
+              className="grid md:grid-cols-2 justify-items-center gap-8 place-self-center text-xs lg:text-base"
+            >
               {userBookings.map(booking => (
-                <div key={booking.bookingId} className="grid grid-cols-2 gap-2 border rounded-md shadow-md p-4 w-150 bg-white">
-                  <div className="flex gap-3 ">
-                    <SquareUser size={22}/>
+                <div 
+                  key={booking.bookingId} 
+                  className="grid grid-cols-2 gap-2 items-center border rounded-md shadow-md p-4 bg-white w-100"
+                >
+                  <div className="flex gap-3 items-center">
+                    <SquareUser className="w-4" />
                     <h1>Name</h1>
                   </div>
-                  <h1> : {booking.firstName} {booking.lastName} </h1>
+                  <h1 className="break-words" > : {booking.firstName} {booking.lastName} </h1>
           
-                  <div className="flex gap-3 ">
-                    <MapPin size={22}/>
+                  <div className="flex gap-3 items-center">
+                    <MapPin className="w-4" />
                     <h1>Address</h1>
                   </div>
-                  <h1> : {booking.address} </h1>
+                  <h1 className="break-words"> : {booking.address} </h1>
           
-                  <div className="flex gap-3 ">
-                    <Phone size={22}/>
+                  <div className="flex gap-3 items-center">
+                    <Phone className="w-4" />
                     <h1>Phone #</h1>
                   </div>
-                  <h1> : {booking.phoneNumber} </h1>
+                  <h1 className="break-words"> : {booking.phoneNumber} </h1>
             
-                  <div className="flex gap-3 ">
-                    <Calendar1 size={22}/>
+                  <div className="flex gap-3 items-center">
+                    <Calendar1 className="w-4" />
                     <h1>Pickup Date & Time</h1>
                   </div>
-                  <h1> : {booking.pickupDateTime} </h1>
+                  <h1 className="break-words"> : {booking.pickupDateTime} </h1>
             
-                  <div className="flex gap-3 ">
-                    {booking.status === "PENDING" ? < CircleEllipsis size={22}/>
-                      : booking.status === "CONFIRM" ? <CircleCheck size={22}/>
-                      : booking.status === "COMPLETED" ? <CircleCheck size={22}/>
-                      : booking.status === "DECLINED" && <CircleX size={22}/>}
+                  <div className="flex gap-3 items-center">
+                    {booking.status === "PENDING" ? < CircleEllipsis className="w-4" />
+                      : booking.status === "CONFIRM" ? <CircleCheck className="w-4" />
+                      : booking.status === "COMPLETED" ? <CircleCheck className="w-4" />
+                      : booking.status === "DECLINED" && <CircleX className="w-4" />}
                     <h1>Status</h1>
                   </div>
                   <h1>
@@ -121,17 +126,17 @@ export default function BookingsUser() {
                     </span>
                   </h1>
               
-                  <div className="flex gap-3 ">
-                    <CarFront size={22}/>
+                  <div className="flex gap-3 items-center">
+                    <CarFront className="w-4" />
                     <h1>Rented Vehicle</h1>
                   </div>
-                  <h1> : {booking.vehicle.name} </h1>
+                  <h1 className="break-words"> : {booking.vehicle.name} </h1>
 
-                  <div className="flex gap-3 ">
-                    <HandCoins size={22}/>
+                  <div className="flex gap-3 items-center">
+                    <HandCoins className="w-4" />
                     <h1>Total payment</h1>
                   </div>
-                  <h1> : {booking.vehicle.price.toLocaleString()} </h1>
+                  <h1 className="break-words"> : {booking.vehicle.price.toLocaleString()} </h1>
 
                   <div className="flex gap-3 mt-5">
                     <div>
@@ -147,9 +152,8 @@ export default function BookingsUser() {
                     >
                       Delete
                       {isPending 
-                        && <LoaderCircle 
-                            size={50}
-                            className="animate-spin" 
+                        && <LoaderCircle  
+                            className="animate-spin w-4" 
                           />}
                     </Button>
                   </div>

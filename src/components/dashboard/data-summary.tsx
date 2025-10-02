@@ -45,25 +45,34 @@ export default function DataSummary() {
       <h1 className="ml-1 mb-2 text-sm">Data Summary</h1>
       {isLoading
         ? <p>Retrieving weekly summary data. Please wait....</p>
-        : <div className="flex justify-between items-center gap-5">
-            <div className="bg-white border rounded-sm w-full p-5 flex items-center gap-5 shadow-xs">
-              <Car size={45} strokeWidth={1}/>
+        : <div className="flex  justify-between items-center gap-5">
+            <div className="bg-white border rounded-sm w-full p-3 md:p-5 flex items-center gap-5 shadow-xs">
+              <Car 
+                strokeWidth={1}
+                className="w-7 h-7"
+              />
               <div>
-                <h1 className="text-sm">Total Vehicles</h1>
+                <h1 className="text-xs lg:text-sm">Total Vehicles</h1>
                 <p className="text-xl">{summaryData?.vehicles}</p>
               </div>
             </div>
-            <div className="bg-white border rounded-sm w-full p-5 flex items-center gap-5 shadow-xs">
-              <ClipboardCheck size={30} strokeWidth={1}/>
+            <div className="bg-white border rounded-sm w-full p-3 md:p-5 flex items-center gap-5 shadow-xs">
+              <ClipboardCheck 
+                strokeWidth={1}
+                className="w-7 h-7"
+              />
               <div>
-                <h1 className="text-sm">Total Bookings</h1>
+                <h1 className="text-xs lg:text-sm">Total Bookings</h1>
                 <p className="text-xl">{summaryData?.bookings}</p>
               </div>
             </div>
-            <div className="bg-white border rounded-sm w-full p-5 flex items-center gap-5 shadow-xs">
-              <MessageCircle size={30} strokeWidth={1}/>
+            <div className="bg-white border rounded-sm w-full p-3 md:p-5 flex items-center gap-5 shadow-xs">
+              <MessageCircle 
+                strokeWidth={1}
+                className="w-7 h-7"
+              />
               <div>
-                <h1 className="text-sm">Total testimonials</h1>
+                <h1 className="text-xs lg:text-sm">Total testimonials</h1>
                 <p className="text-xl">{summaryData?.testimonials}</p>
               </div>
             </div>

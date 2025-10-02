@@ -47,13 +47,13 @@ export default function BookingTable() {
 
   return (
     <div>
-      <div className="border rounded-md shadow-sm p-2 font-poppins bg-white">
-        <h1  className="p-3 font-semibold tracking-wide border-b-1">List of Bookings</h1>
+      <div className="border rounded-md shadow-sm font-poppins bg-white max-w-150 lg:max-w-300">
+        <h1 className="p-3 font-semibold tracking-wide border-b-1 text-sm lg:text-base">List of Bookings</h1>
         {isLoading
           ? <p className="text-center italic text-sm">Retrieving list of bookings. Please wait </p>
           : (bookings?.bookingDetails.length > 0 && bookings?.vehicles.length > 0) 
           && <div className="max-h-[400px] overflow-auto">
-              <Table>
+              <Table className="text-xs lg:text-base">
               <TableHeader>
                 <TableRow className="bg-gray-100">
                   <TableHead>Name</TableHead>

@@ -71,16 +71,16 @@ export default function TestimonialForm() {
   return (
     <div className="font-poppins w-1/2 flex flex-col gap-5 place-self-center py-5">
       <Toaster position="top-center"/>
-      <h1 className="text-3xl font-bold">Share your feedback</h1>
-      <p className="text-base">Thanks for using our service! We'd love to hear your thoughts—just a quick message to let us know how we can improve and do better next time.</p>
+      <h1 className="text-2xl md:text-3xl font-bold">Share your feedback</h1>
+      <p className="text-sm md:text-base">Thanks for using our service! We'd love to hear your thoughts—just a quick message to let us know how we can improve and do better next time.</p>
 
-      <p className="text-base">Your feedback really helps us grow and serve you better. Feel free to share anything you liked or think we could do differently—we&apos;re always listening!</p>
+      <p className="text-sm md:text-base">Your feedback really helps us grow and serve you better. Feel free to share anything you liked or think we could do differently—we&apos;re always listening!</p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="content"></label>
           <Textarea 
-            className="h-[180px] bg-white resize-none" 
+            className="h-[180px] bg-white resize-none text-sm md:text-base" 
             placeholder="Your message" 
             id="content" 
             {...register("content")}

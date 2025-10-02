@@ -201,7 +201,7 @@ export type DeleteBookingAlertAdminPropsType = {
 /* BookingFormAdmin component */
 export type BookingFormAdmin = {
   vehicleId: string | null,
-  setVehicleId: (value: string) => void
+  setVehicleId: (value: string | null) => void
 }
 /* --------- */
 

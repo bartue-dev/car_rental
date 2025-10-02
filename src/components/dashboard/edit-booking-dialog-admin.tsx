@@ -118,7 +118,7 @@ export default function EditBookingsDialogAdmin({
   }
 
   return (
-    <DialogContent className="sm:max-w-[425px] font-poppins">
+    <DialogContent className="sm:max-w-[425px] h-127 font-poppins overflow-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <DialogHeader>
           <DialogTitle>Edit Booking Details</DialogTitle>
